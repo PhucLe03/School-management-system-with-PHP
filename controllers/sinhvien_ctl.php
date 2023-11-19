@@ -21,7 +21,7 @@ function getTatCaSinhVien($conn)
 function getSinhVienTheoId($id, $conn)
 {
   $sql = "SELECT * FROM sinhvien
-           WHERE sinhvien_id=?";
+           WHERE masinhvien=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
 
@@ -35,14 +35,14 @@ function getSinhVienTheoId($id, $conn)
 
 
 // Check if the username Unique
-function usernameDocNhat($uname, $conn, $sinhvien_id = 0)
+function usernameDocNhat($uname, $conn, $masinhvien = 0)
 {
-  $sql = "SELECT username, sinhvien_id FROM sinhvien
+  $sql = "SELECT username, masinhvien FROM sinhvien
            WHERE username=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$uname]);
 
-  if ($sinhvien_id == 0) {
+  if ($masinhvien == 0) {
     if ($stmt->rowCount() >= 1) {
       return 0;
     } else {
@@ -51,7 +51,7 @@ function usernameDocNhat($uname, $conn, $sinhvien_id = 0)
   } else {
     if ($stmt->rowCount() >= 1) {
       $sinhvien = $stmt->fetch();
-      if ($sinhvien['sinhvien_id'] == $sinhvien_id) {
+      if ($sinhvien['masinhvien'] == $masinhvien) {
         return 1;
       } else {
         return 0;
@@ -63,12 +63,12 @@ function usernameDocNhat($uname, $conn, $sinhvien_id = 0)
 }
 
 
-function XacMinhMatKhauSinhVien($sinhvien_mk, $conn, $sinhvien_id)
+function XacMinhMatKhauSinhVien($sinhvien_mk, $conn, $masinhvien)
 {
   $sql = "SELECT * FROM sinhvien
-           WHERE sinhvien_id=?";
+           WHERE masinhvien=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$sinhvien_id]);
+  $stmt->execute([$masinhvien]);
 
   if ($stmt->rowCount() == 1) {
     $sinhvien = $stmt->fetch();

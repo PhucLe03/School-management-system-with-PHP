@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 .body-home, .body-login {
-	background: url(../bk.png);
+	background: url(../imgs/bk.png);
 	background-size: cover;
 	background-attachment: fixed;
 }

@@ -1,15 +1,16 @@
-<?php 
+<?php
 session_start();
 
-if (isset($_POST['uname']) &&
+if (
+    isset($_POST['uname']) &&
     isset($_POST['pass']) &&
-    isset($_POST['role'])) {
+    isset($_POST['role'])
+) {
+    include "../DB_connection.php";
 
-	// include "../DB_connection.php";
-	
-	$uname = $_POST['uname'];
-	$pass = $_POST['pass'];
-	$role = $_POST['role'];
+    $uname = $_POST['uname'];
+    $pass = $_POST['pass'];
+    $role = $_POST['role'];
 
     $miss_uname = false;
     $miss_pass = false;
@@ -20,43 +21,64 @@ if (isset($_POST['uname']) &&
         header("Location: ../login.php?error=$em");
         exit;
     }
-	if (empty($uname)) {
-		$miss_uname = true;
+    if (empty($uname)) {
+        $miss_uname = true;
     }
     if (empty($pass)) {
-		$miss_pass = true;
+        $miss_pass = true;
     }
 
-    if ($miss_uname==true && $miss_pass==true) {
+    if ($miss_uname == true && $miss_pass == true) {
         $em  = "unp";
         header("Location: ../login.php?error=$em");
         exit;
-    }
-    else if ($miss_uname==true) {
+    } else if ($miss_uname == true) {
         $em  = "u";
         header("Location: ../login.php?error=$em");
         exit;
-    }
-    else if ($miss_pass==true) {
+    } else if ($miss_pass == true) {
         $em  = "p";
         header("Location: ../login.php?error=$em");
         exit;
-    }
-    else {
+    } else {
         // Đăng nhập
-        if ($uname=="Phuc"&&$pass=="123") {
-            header("Location: ../SinhVien/index.php");
+        $sql = "";
+        if (true) {
+            $sql = "SELECT * FROM sinhvien 
+                    WHERE tendangnhap = ?";
+            $role = "Sinhvien";
+        }
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$uname]);
+
+        if ($stmt->rowCount() == 1) {
+            $user = $stmt->fetch();
+            $username = $user['tendangnhap'];
+            $password = $user['matkhau'];
+            if ($username === $uname) {
+                if ($pass === $password) { //if (password_verify($pass, $password)) {
+                    $_SESSION['tucach'] = $role;
+                    $id = $user['masinhvien'];
+                    $_SESSION['masinhvien'] = $id;
+                    header("Location: ../Sinhvien/index.php");
+                    exit;
+                } else {
+                    $em  = "w";
+                    header("Location: ../login.php?error=$em");
+                    exit;
+                }
+            } else {
+                $em  = "w";
+                header("Location: ../login.php?error=$em");
+                exit;
+            }
+        } else {
+            $em  = "w";
+            header("Location: ../login.php?error=$em");
             exit;
         }
-        else {
-        	$em  = "Incorrect Username or Password";
-		    header("Location: ../login.php?error=$em");
-		    exit;
-        }
-	}
-
-
-}else{
-	header("Location: ../login.php");
-	exit;
+    }
+} else {
+    header("Location: ../login.php");
+    exit;
 }

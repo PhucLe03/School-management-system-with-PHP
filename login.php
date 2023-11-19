@@ -7,7 +7,7 @@
     <title>Đăng nhập</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="icon.ico">
+    <link rel="icon" href="imgs/icon.ico">
 </head>
 
 <body class="body-login">
@@ -16,7 +16,7 @@
             <form class="login" method="post" action="helper/process_login.php">
 
                 <div class="text-center">
-                    <img src="logo.png" width="100">
+                    <img src="imgs/logo.png" width="100">
                 </div>
                 <h3>ĐĂNG NHẬP</h3>
                 <?php 
@@ -33,6 +33,9 @@
                         }
                         else if ($err_stmt=="p") {
                             $err = "Mật khẩu không được để trống";
+                        }
+                        else if ($err_stmt=="w") {
+                            $err = "Tên đăng nhập hoặc mật khẩu sai";
                         }
                         else {
                             $err = "Đã có lỗi xảy ra";
