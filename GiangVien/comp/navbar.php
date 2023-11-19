@@ -15,7 +15,7 @@
              href="index.php">Tổng quan</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="diem.php">Điểm</a>
+          <a class="nav-link" href="lop.php">Danh sách lớp</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="doimatkhau.php">Đổi mật khẩu</a>

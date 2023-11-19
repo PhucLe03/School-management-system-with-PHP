@@ -43,10 +43,15 @@ if (
     } else {
         // Đăng nhập
         $sql = "";
-        if (true) {
+        $tucach = "";
+        if ($role=="2") {
+            $sql = "SELECT * FROM giangvien 
+                    WHERE tendangnhap = ?";
+            $tucach = "GiangVien";
+        } else if ($role=="3") {
             $sql = "SELECT * FROM sinhvien 
                     WHERE tendangnhap = ?";
-            $role = "Sinhvien";
+            $tucach = "Sinhvien";
         }
         $stmt = $conn->prepare($sql);
         $stmt->execute([$uname]);
@@ -56,12 +61,19 @@ if (
             $username = $user['tendangnhap'];
             $password = $user['matkhau'];
             if ($username === $uname) {
-                if ($pass === $password) { //if (password_verify($pass, $password)) {
-                    $_SESSION['tucach'] = $role;
-                    $id = $user['masinhvien'];
-                    $_SESSION['masinhvien'] = $id;
-                    header("Location: ../Sinhvien/index.php");
-                    exit;
+                if (password_verify($pass, $password)) {
+                    $_SESSION['tucach'] = $tucach;
+                    if ($tucach=="GiangVien") {
+                        $id = $user['magiangvien'];
+                        $_SESSION['magiangvien'] = $id;
+                        header("Location: ../GiangVien/index.php");
+                        exit;
+                    } else if ($tucach=="Sinhvien") {
+                        $id = $user['masinhvien'];
+                        $_SESSION['masinhvien'] = $id;
+                        header("Location: ../Sinhvien/index.php");
+                        exit;
+                    }
                 } else {
                     $em  = "w";
                     header("Location: ../login.php?error=$em");
@@ -79,6 +91,7 @@ if (
         }
     }
 } else {
-    header("Location: ../login.php");
+    $em  = "o";
+    header("Location: ../login.php?error=$em");
     exit;
 }

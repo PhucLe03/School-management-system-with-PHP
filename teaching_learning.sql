@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `giangvien` (
-  `magiangvien` int(11) NOT NULL,
+  `magiangvien` varchar(127) NOT NULL,
   `ho_tenlot` varchar(255) NOT NULL,
   `ten` varchar(255) NOT NULL,
   `tendangnhap` varchar(127) NOT NULL,
@@ -39,6 +39,14 @@ CREATE TABLE `giangvien` (
   `gioitinh` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `giangvien`
+--
+
+INSERT INTO `giangvien` (`magiangvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkhau`, `email`, `sdt`, `namsinh`, `gioitinh`) VALUES
+('GV-1', 'Giảng', 'Viên', 'giangvien', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'giangvien@hcmut.edu.vn', '0123456789', 1975, 1),
+('GV-2', 'Hiệu', 'Trưởng', 'hieutruong', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'hieutruong@hcmut.edu.vn', '0123456789', 1974, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,8 +54,8 @@ CREATE TABLE `giangvien` (
 --
 
 CREATE TABLE `khoahoc` (
-  `makhoahoc` varchar(255) NOT NULL,
-  `tenkhoahoc` int(11) NOT NULL
+  `makhoahoc` varchar(127) NOT NULL,
+  `tenkhoahoc` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -57,7 +65,7 @@ CREATE TABLE `khoahoc` (
 --
 
 CREATE TABLE `sinhvien` (
-  `masinhvien` int(11) NOT NULL,
+  `masinhvien` varchar(127) NOT NULL,
   `ho_tenlot` varchar(255) NOT NULL,
   `ten` varchar(255) NOT NULL,
   `tendangnhap` varchar(127) NOT NULL,
@@ -73,8 +81,8 @@ CREATE TABLE `sinhvien` (
 --
 
 INSERT INTO `sinhvien` (`masinhvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkhau`, `email`, `sdt`, `namsinh`, `gioitinh`) VALUES
-(1, 'Lê Hoàng', 'Phúc', 'phucle03', '123', 'phuc.le1103@hcmut.edu.vn', '0944681103', 2003, 1),
-(2, 'Lê Hoàng', 'Phúc 1', 'phucle03_1', '123', 'phuc.le1103@hcmut.edu.vn', '0944681103', 2003, 1);
+('SV-1', 'Lê Hoàng', 'Phúc', 'phuc.le1103', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1),
+('SV-2', 'Lê Hoàng', 'Phúc 1', 'phuc.le1103_1', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1);
 
 --
 -- Indexes for dumped tables

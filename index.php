@@ -75,7 +75,6 @@ include "DB_connection.php";
 
 		</div>
 	</div>
-	<!-- Code here -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

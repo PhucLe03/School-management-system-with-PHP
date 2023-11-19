@@ -1,18 +1,19 @@
 <?php
 session_start();
 if (
-  isset($_SESSION['masinhvien']) && isset($_SESSION['tucach'])
+  isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])
 ) {
 
-  if ($_SESSION['tucach'] == 'Sinhvien') {
+  if ($_SESSION['tucach'] == 'GiangVien') {
     include "../DB_connection.php";
-    include "../controllers/sinhvien_ctl.php";
+    // include "../controllers/giangvien_ctl.php";
+    include "../controllers/giangvien_ctl.php";
 
-    $masinhvien = $_SESSION['masinhvien'];
+    $magiangvien = $_SESSION['magiangvien'];
 
-    $sinhvien = getSinhVienTheoId($masinhvien, $conn);
+    $giangvien = getGiangVienTheoId($magiangvien, $conn);
     $gioitinh = "Nam";
-    if ($sinhvien['gioitinh']==0) {
+    if ($giangvien['gioitinh']==0) {
       $gioitinh = "Nữ";
     }
 ?>
@@ -25,8 +26,8 @@ if (
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>
         <?php
-        $tensinhvien = $sinhvien['ho_tenlot'] . " " . $sinhvien['ten'];
-        $title = "Sinh viên " . $tensinhvien;
+        $tengiangvien = $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
+        $title = "Giảng viên " . $tengiangvien;
         include "../header.php";
         ?>
       </title>
@@ -51,16 +52,16 @@ if (
               <!-- <img src="../img/student-<?= $student['gender'] ?>.png" class="card-img-top" alt="..."> -->
               <img src="../imgs/logo.png" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title text-center">@<?= $sinhvien['tendangnhap'] ?></h5>
+                <h5 class="card-title text-center">@<?= $giangvien['tendangnhap'] ?></h5>
               </div>
             </div>
             <div class="col-8">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Họ và tên: <?= $tensinhvien ?></li>
-                <li class="list-group-item">Năm sinh: <?= $sinhvien['namsinh'] ?></li>
+                <li class="list-group-item">Họ và tên: <?= $tengiangvien ?></li>
+                <li class="list-group-item">Năm sinh: <?= $giangvien['namsinh'] ?></li>
                 <li class="list-group-item">Giới tính: <?= $gioitinh ?></li>
-                <li class="list-group-item">Số điện thoại: <?= $sinhvien['sdt'] ?></li>
-                <li class="list-group-item">Email: <?= $sinhvien['email'] ?></li>
+                <li class="list-group-item">Số điện thoại: <?= $giangvien['sdt'] ?></li>
+                <li class="list-group-item">Email: <?= $giangvien['email'] ?></li>
               </ul>
             </div>
 
