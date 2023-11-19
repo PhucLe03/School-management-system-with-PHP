@@ -20,7 +20,8 @@
                 </div>
                 <h3>ĐĂNG NHẬP</h3>
                 <?php 
-                if (isset($err_stmt)) { ?>
+                // $err_stmt = $_GET['error'];
+                if (isset($_GET['error'])) { ?>
                     <div class="alert alert-danger" role="alert">
                         <?php
                         $err_stmt = $_GET['error'];
@@ -36,8 +37,9 @@
                         else {
                             $err = "Đã có lỗi xảy ra";
                         }
-                        echo $err;
+                        // echo $err;
                         ?>
+                        <?= $err ?>
                     </div>
                 <?php } ?>
                 <div class="form-floating mb-3">

@@ -44,6 +44,15 @@ if (isset($_POST['uname']) &&
     }
     else {
         // Đăng nhập
+        if ($uname=="Phuc"&&$pass=="123") {
+            header("Location: ../SinhVien/index.php");
+            exit;
+        }
+        else {
+        	$em  = "Incorrect Username or Password";
+		    header("Location: ../login.php?error=$em");
+		    exit;
+        }
 	}
 
 
