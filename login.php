@@ -20,11 +20,10 @@
                 </div>
                 <h3>ĐĂNG NHẬP</h3>
                 <?php 
-                $err_stmt = $_GET['error'];
                 if (isset($err_stmt)) { ?>
                     <div class="alert alert-danger" role="alert">
                         <?php
-                        // $err_stmt = $_GET['error'];
+                        $err_stmt = $_GET['error'];
                         if ($err_stmt=="unp") {
                             $err = "Tên đăng nhập và Mật khẩu không được để trống";
                         }
@@ -55,14 +54,14 @@
                     <label class="form-label">Đăng nhập với tư cách</label>
                     <select class="form-control" name="role">
                         <option value="1">Admin</option>
-                        <option value="2">Teacher</option>
-                        <option value="3">Student</option>
-                        <option value="4">Registrar Office</option>
+                        <option value="2">Giảng Viên</option>
+                        <option value="3">Sinh Viên</option>
+                        <option value="4">Con ma</option>
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Login</button>
-                <a href="index.php" class="text-decoration-none">Home</a>
+                <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                <a href="index.php" class="text-decoration-none">Về trang chủ</a>
             </form>
 
             <br /><br />
