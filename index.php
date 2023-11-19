@@ -42,7 +42,7 @@
 		</nav>
         <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
         	<img src="logo.png">
-        	<h4>Welcome to BK TeachingLearning System</h4>
+        	<h4>BK Teaching-Learning System</h4>
         	<p>Tiên phong - Khai phóng - Sáng tạo</p>
         </section>
         <section id="about"
@@ -62,9 +62,7 @@
 			  </div>
 			</div>
         </section>
-        <div class="text-center text-light">
-        	Copyright &copy; 2023 HCMUT. All rights reserved.
-        </div>
+		<?php include "footer.php"; ?>
 
     	</div>
     </div>

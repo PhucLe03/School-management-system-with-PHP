@@ -5,11 +5,11 @@
 	background-attachment: fixed;
 }
 .black-fill {
-	background: rgba(0,0,0, 0.7);
+	background: rgba(0,0,0, 0.75);
 	min-height: 100vh;
 }
 #homeNav {
-	background: rgba(255,255,255, 0.5) !important;
+	background: rgba(255,255,255, 0.7) !important;
 }
 .welcome-text {
 	min-height: 80vh;
@@ -25,7 +25,7 @@
 }
 .welcome-text p {
 	color: #222;
-	background: rgba(255,255,255, 0.5);
+	background: rgba(255,255,255, 0.7);
 	padding: 5px;
 	border-radius: 4px;
 }
@@ -35,7 +35,7 @@
 #about .card-1{
 	max-width: 600px;
 	width: 90%;
-	background: rgba(255,255,255, 0.5);
+	background: rgba(255,255,255, 0.7);
 	padding: 20px;
 	border-radius: 5px;
 }
@@ -50,7 +50,7 @@
 #contact form{
 	max-width: 600px;
 	width: 90%;
-	background: rgba(255,255,255, 0.5);
+	background: rgba(255,255,255, 0.7);
 	padding: 20px;
 	border-radius: 5px;
 }
@@ -65,7 +65,7 @@ textarea {
 .login {
 	max-width: 500px;
 	width: 90%;
-	background: rgba(255,255,255, 0.5);
+	background: rgba(255,255,255, 0.7);
 	padding: 10px;
 	border-radius: 10px;
 }
