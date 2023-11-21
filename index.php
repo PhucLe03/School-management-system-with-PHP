@@ -1,5 +1,6 @@
 <?php
 include "DB_connection.php";
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,9 +44,28 @@ include "DB_connection.php";
 							</li>
 						</ul>
 						<ul class="navbar-nav me-right mb-2 mb-lg-0">
-							<li class="nav-item">
-								<a class="nav-link" href="login.php">Đăng nhập</a>
-							</li>
+							<?php
+							if (isset($_SESSION['tucach'])) {
+								if ($_SESSION['tucach'] == 'Admin') {
+									$href_query = "./Admin/index.php";
+								} else if ($_SESSION['tucach'] == 'GiangVien') {
+									$href_query = "./GiangVien/index.php";
+								} else if ($_SESSION['tucach'] == 'SinhVien') {
+									$href_query = "./SinhVien/index.php";
+								}
+							?>
+								<li class="nav-item">
+									<a class="nav-link" href="<?php echo $href_query; ?>">Trang cá nhân</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="index_logout.php">Đăng xuất</a>
+								</li>
+							<?php
+							} else { ?>
+								<li class="nav-item">
+									<a class="nav-link" href="login.php">Đăng nhập</a>
+								</li>
+							<?php } ?>
 						</ul>
 					</div>
 				</div>

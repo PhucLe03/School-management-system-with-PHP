@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">
+    <a class="navbar-brand" href="../index.php">
       <img src="../imgs/logo.png" width="40">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,10 @@
           <a class="nav-link" aria-current="page" href="index.php">Tổng quan</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="diem.php">Điểm</a>
+          <a class="nav-link" href="hoc.php">Học</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="diem.php">Xem điểm</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="doimatkhau.php">Đổi mật khẩu</a>

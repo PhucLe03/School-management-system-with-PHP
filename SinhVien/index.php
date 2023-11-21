@@ -4,7 +4,7 @@ if (
   isset($_SESSION['masinhvien']) && isset($_SESSION['tucach'])
 ) {
 
-  if ($_SESSION['tucach'] == 'Sinhvien') {
+  if ($_SESSION['tucach'] == 'SinhVien') {
     include "../DB_connection.php";
     include "../controllers/sinhvien_ctl.php";
 

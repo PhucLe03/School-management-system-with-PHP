@@ -1,22 +1,23 @@
 <?php
 session_start();
 if (
-    isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])
+    isset($_SESSION['masinhvien']) && isset($_SESSION['tucach'])
 ) {
 
-    if ($_SESSION['tucach'] == 'GiangVien') {
+    if ($_SESSION['tucach'] == 'SinhVien') {
         include "../DB_connection.php";
+        include "../controllers/sinhvien_ctl.php";
         include "../controllers/giangvien_ctl.php";
         include "../controllers/lophoc_ctl.php";
 
-        $magiangvien = $_SESSION['magiangvien'];
+        $masinhvien = $_SESSION['masinhvien'];
 
-        $giangvien = getGiangVienTheoId($magiangvien, $conn);
+        $sinhvien = getSinhVienTheoId($masinhvien, $conn);
+        $lophoc = getLopCuaSinhVien($masinhvien, $conn);
         // $gioitinh = "Nam";
-        // if ($giangvien['gioitinh'] == 0) {
+        // if ($sinhvien['gioitinh'] == 0) {
         //     $gioitinh = "Nữ";
         // }
-        $lophoc = getLopCuaGiangVien($magiangvien, $conn);
 ?>
 
         <!DOCTYPE html>
@@ -27,8 +28,8 @@ if (
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>
                 <?php
-                $tengiangvien = $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
-                $title = "Giảng viên " . $tengiangvien;
+                $tensinhvien = $sinhvien['ho_tenlot'] . " " . $sinhvien['ten'];
+                $title = "Sinh viên " . $tensinhvien;
                 include "../header.php";
                 ?>
             </title>
@@ -54,7 +55,7 @@ if (
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Lớp</th>
-                                    <th scope="col">Số sinh viên</th>
+                                    <th scope="col">Giảng viên</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,7 +64,16 @@ if (
                                     $tenkhoa = getTenCuaKhoa($lop['makhoahoc'],$conn);
                                     $tenkhoa = $tenkhoa['tenkhoahoc'];
                                     $tenlop = $tenkhoa . " (" . $lop['makhoahoc'].")";
-                                    $soluong = getSoLuongSinhVienCuaLop($lop['malophoc'],$lop['makhoahoc'],$conn);
+                                    $gv = getGiangVienCuaLop($lop['malophoc'],$lop['makhoahoc'],$conn);
+                                    $giangvien = getGiangVienTheoId($gv['magiangvien'],$conn);
+                                    $gGV_tmp = $giangvien['gioitinh'];
+                                    if ($gGV_tmp==true) {
+                                        $gGV = "Thầy ";
+                                    }
+                                    else {
+                                        $gGV = "Cô ";
+                                    }
+                                    $tengiangvien = $gGV . $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
                                 ?>
                                     <tr>
                                         <th scope="row">
@@ -75,7 +85,7 @@ if (
                                             <?= $lop['malophoc'] ?>
                                         </td>
                                         <td>
-                                            <?= $soluong?>
+                                            <?= $tengiangvien ?>
                                         </td>
                                     </tr>
 

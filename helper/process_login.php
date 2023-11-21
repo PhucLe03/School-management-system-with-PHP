@@ -55,7 +55,7 @@ if (
         } else if ($role=="3") {
             $sql = "SELECT * FROM sinhvien 
                     WHERE tendangnhap = ?";
-            $tucach = "Sinhvien";
+            $tucach = "SinhVien";
         }
         $stmt = $conn->prepare($sql);
         $stmt->execute([$uname]);
@@ -77,7 +77,7 @@ if (
                         $_SESSION['magiangvien'] = $id;
                         header("Location: ../GiangVien/index.php");
                         exit;
-                    } else if ($tucach=="Sinhvien") {
+                    } else if ($tucach=="SinhVien") {
                         $id = $user['masinhvien'];
                         $_SESSION['masinhvien'] = $id;
                         header("Location: ../Sinhvien/index.php");
