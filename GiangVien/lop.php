@@ -1,13 +1,9 @@
 <?php
 session_start();
-if (
-    isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])
-) {
+if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])) {
 
     if ($_SESSION['tucach'] == 'GiangVien') {
-        include "../DB_connection.php";
-        include "../controllers/giangvien_ctl.php";
-        include "../controllers/lophoc_ctl.php";
+        include "../controllers/includer.php";
 
         $magiangvien = $_SESSION['magiangvien'];
 
@@ -47,6 +43,7 @@ if (
             if ($lophoc != 0) {
             ?>
                 <div class="container mt-5">
+                    <h1>Danh sách lớp</h1>
 
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered mt-3 n-table table-hover">
@@ -60,22 +57,25 @@ if (
                             <tbody>
                                 <?php $i = 0;
                                 foreach ($lophoc as $lop) {
-                                    $tenkhoa = getTenCuaKhoa($lop['makhoahoc'],$conn);
+                                    $tenkhoa = getTenCuaKhoa($lop['makhoahoc'], $conn);
                                     $tenkhoa = $tenkhoa['tenkhoahoc'];
-                                    $tenlop = $tenkhoa . " (" . $lop['makhoahoc'].")";
-                                    $soluong = getSoLuongSinhVienCuaLop($lop['malophoc'],$lop['makhoahoc'],$conn);
+                                    $tenlop = $tenkhoa . " (" . $lop['makhoahoc'] . ")";
+                                    $soluong = getSoLuongSinhVienCuaLop($lop['malophoc'], $lop['makhoahoc'], $conn);
                                 ?>
                                     <tr>
                                         <th scope="row">
-                                            <?php echo $i; $i++; ?>
+                                            <?php echo $i;
+                                            $i++; ?>
                                         </th>
                                         <td>
-                                            <?= $tenlop; ?>
-                                            <br/>
-                                            <?= $lop['malophoc'] ?>
+                                            <a href="index.php">
+                                                <?= $tenlop; ?>
+                                                <br />
+                                                <?= $lop['malophoc'] ?>
+                                            </a>
                                         </td>
                                         <td>
-                                            <?= $soluong?>
+                                            <?= $soluong ?>
                                         </td>
                                     </tr>
 

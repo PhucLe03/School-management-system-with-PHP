@@ -44,15 +44,15 @@ if (
         // Đăng nhập
         $sql = "";
         $tucach = "";
-        if ($role=="1") {
+        if ($role=="AD") {
             $sql = "SELECT * FROM admin 
                     WHERE tendangnhap = ?";
             $tucach = "Admin";
-        } else if ($role=="2") {
+        } else if ($role=="GV") {
             $sql = "SELECT * FROM giangvien 
                     WHERE tendangnhap = ?";
             $tucach = "GiangVien";
-        } else if ($role=="3") {
+        } else if ($role=="SV") {
             $sql = "SELECT * FROM sinhvien 
                     WHERE tendangnhap = ?";
             $tucach = "SinhVien";

@@ -58,10 +58,10 @@
                 <div class="mb-3">
                     <label class="form-label">Đăng nhập với tư cách</label>
                     <select class="form-control" name="role">
-                        <option value="1">Admin</option>
-                        <option value="2">Giảng Viên</option>
-                        <option value="3">Sinh Viên</option>
-                        <option value="4">Con ma</option>
+                        <option value="SV">Sinh Viên</option>
+                        <option value="GV">Giảng Viên</option>
+                        <option value="AD">Admin</option>
+                        <!-- <option value="EX">Con ma</option> -->
                     </select>
                 </div>
 

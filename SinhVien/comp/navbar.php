@@ -24,8 +24,8 @@
       </ul>
       <ul class="navbar-nav me-right mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link">
-            <?= $title ?>
+          <a class="nav-link" href="index.php">
+            <?= $usrname ?>
           </a>
         </li>
         <li class="nav-item">

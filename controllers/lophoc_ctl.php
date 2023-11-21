@@ -35,7 +35,8 @@ function getSoLuongSinhVienCuaLop($lop_id, $khoa_id, $conn)
 
 function getGiangVienCuaLop($lop_id, $khoa_id, $conn)
 {
-  $sql = "SELECT magiangvien FROM lophoc
+  // ! WARNING: DO NOT TOUCH THIS
+  $sql = "SELECT id,magiangvien FROM lophoc
           WHERE malophoc=:malop AND makhoahoc=:makhoa";
   $stmt = $conn->prepare($sql);
   $stmt->bindParam(':malop',$lop_id);
@@ -77,3 +78,49 @@ function getTenCuaKhoa($khoa_id, $conn) {
     return 0;
   }
 }
+
+function getLopTheoId($id, $conn) {
+  $sql = "SELECT malophoc,makhoahoc FROM lophoc
+          WHERE id=?";
+  $stmt = $conn->prepare($sql);    
+  $stmt->execute([$id]);
+
+  if ($stmt->rowCount() == 1) {
+    $lophoc = $stmt->fetch();
+    return $lophoc;
+  } else {
+    return 0;
+  }
+}
+
+function getBaiGiangCuaLop($lop_id, $khoa_id, $conn) {
+  $sql = "SELECT id,tieude FROM baigiang
+          WHERE malophoc=:malop AND makhoahoc=:makhoa";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':malop',$lop_id);
+  $stmt->bindParam(':makhoa',$khoa_id);
+    
+  $stmt->execute();
+  if ($stmt->rowCount() >= 1) {
+    $baigiang = $stmt->fetchAll();
+    return $baigiang;
+  } else {
+    return 0;
+  }
+}
+
+function getNoiDungBaiGiang($baigiang_id, $conn) {
+  $sql = "SELECT tieude,noidung FROM baigiang
+          WHERE malophoc=:id";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':id',$baigiang_id);
+    
+  $stmt->execute();
+  if ($stmt->rowCount() == 1) {
+    $baigiang = $stmt->fetch();
+    return $baigiang;
+  } else {
+    return 0;
+  }
+}
+

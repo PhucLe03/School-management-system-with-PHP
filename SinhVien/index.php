@@ -5,8 +5,7 @@ if (
 ) {
 
   if ($_SESSION['tucach'] == 'SinhVien') {
-    include "../DB_connection.php";
-    include "../controllers/sinhvien_ctl.php";
+    include "../controllers/includer.php";
 
     $masinhvien = $_SESSION['masinhvien'];
 
@@ -27,6 +26,7 @@ if (
         <?php
         $tensinhvien = $sinhvien['ho_tenlot'] . " " . $sinhvien['ten'];
         $title = "Sinh viên " . $tensinhvien;
+        $usrname = $title;
         include "../header.php";
         ?>
       </title>
@@ -46,6 +46,7 @@ if (
       if ($student != 0) {
       ?>
         <div class="container mt-5">
+          <h1>Trang cá nhân sinh viên</h1>
           <div class="row">
             <div class="col-4 card" style="width: 18rem;">
               <!-- <img src="../img/student-<?= $student['gender'] ?>.png" class="card-img-top" alt="..."> -->
