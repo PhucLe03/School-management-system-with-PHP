@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 02:50 PM
+-- Generation Time: Nov 21, 2023 at 06:21 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -61,6 +61,19 @@ CREATE TABLE `khoahoc` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lophoc`
+--
+
+CREATE TABLE `lophoc` (
+  `malophoc` varchar(127) NOT NULL,
+  `makhoahoc` varchar(127) NOT NULL,
+  `magiangvien` varchar(127) NOT NULL,
+  `tenlophoc` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sinhvien`
 --
 
@@ -82,7 +95,7 @@ CREATE TABLE `sinhvien` (
 
 INSERT INTO `sinhvien` (`masinhvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkhau`, `email`, `sdt`, `namsinh`, `gioitinh`) VALUES
 ('SV-1', 'Lê Hoàng', 'Phúc', 'phuc.le1103', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1),
-('SV-2', 'Lê Hoàng', 'Phúc 1', 'phuc.le1103_1', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1);
+('SV-2', 'Lê Hoàng', 'Phúc 1', 'phucle03_1', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1);
 
 --
 -- Indexes for dumped tables

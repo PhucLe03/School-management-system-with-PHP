@@ -44,7 +44,11 @@ if (
         // Đăng nhập
         $sql = "";
         $tucach = "";
-        if ($role=="2") {
+        if ($role=="1") {
+            $sql = "SELECT * FROM admin 
+                    WHERE tendangnhap = ?";
+            $tucach = "Admin";
+        } else if ($role=="2") {
             $sql = "SELECT * FROM giangvien 
                     WHERE tendangnhap = ?";
             $tucach = "GiangVien";
@@ -63,7 +67,12 @@ if (
             if ($username === $uname) {
                 if (password_verify($pass, $password)) {
                     $_SESSION['tucach'] = $tucach;
-                    if ($tucach=="GiangVien") {
+                    if ($tucach=="Admin") {
+                        $id = $user['maadmin'];
+                        $_SESSION['maadmin'] = $id;
+                        header("Location: ../Admin/index.php");
+                        exit;
+                    } else if ($tucach=="GiangVien") {
                         $id = $user['magiangvien'];
                         $_SESSION['magiangvien'] = $id;
                         header("Location: ../GiangVien/index.php");
