@@ -57,6 +57,7 @@ if (
             <div class="col-8">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Họ và tên: <?= $tensinhvien ?></li>
+                <li class="list-group-item">Mã sinh viên: <?= $sinhvien['masinhvien'] ?></li>
                 <li class="list-group-item">Năm sinh: <?= $sinhvien['namsinh'] ?></li>
                 <li class="list-group-item">Giới tính: <?= $gioitinh ?></li>
                 <li class="list-group-item">Số điện thoại: <?= $sinhvien['sdt'] ?></li>

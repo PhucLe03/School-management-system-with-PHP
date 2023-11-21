@@ -13,7 +13,7 @@ if (
 
     $giangvien = getGiangVienTheoId($magiangvien, $conn);
     $gioitinh = "Nam";
-    if ($giangvien['gioitinh']==0) {
+    if ($giangvien['gioitinh'] == 0) {
       $gioitinh = "Nữ";
     }
 ?>
@@ -58,6 +58,7 @@ if (
             <div class="col-8">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Họ và tên: <?= $tengiangvien ?></li>
+                <li class="list-group-item">Mã giảng viên: <?= $giangvien['magiangvien'] ?></li>
                 <li class="list-group-item">Năm sinh: <?= $giangvien['namsinh'] ?></li>
                 <li class="list-group-item">Giới tính: <?= $gioitinh ?></li>
                 <li class="list-group-item">Số điện thoại: <?= $giangvien['sdt'] ?></li>

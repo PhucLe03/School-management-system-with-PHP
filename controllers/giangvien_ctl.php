@@ -17,12 +17,12 @@ function getGiangVienTheoId($giangvien_id, $conn)
 
 function getLopCuaGiangVien($giangvien_id, $conn)
 {
-  $sql = "SELECT * FROM lophoc
+  $sql = "SELECT malophoc,makhoahoc FROM lophoc
           WHERE magiangvien=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$giangvien_id]);
-  if ($stmt->rowCount() == 1) {
-    $lophoc = $stmt->fetch();
+  if ($stmt->rowCount() >= 1) {
+    $lophoc = $stmt->fetchAll();
     return $lophoc;
   } else {
     return 0;
