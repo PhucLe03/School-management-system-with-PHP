@@ -93,14 +93,12 @@ function getLopTheoId($id, $conn) {
   }
 }
 
-function getBaiGiangCuaLop($lop_id, $khoa_id, $conn) {
+function getBaiGiangCuaLop($lop_id, $conn) {
   $sql = "SELECT id,tieude FROM baigiang
-          WHERE malophoc=:malop AND makhoahoc=:makhoa";
+          WHERE id_lophoc=?";
   $stmt = $conn->prepare($sql);
-  $stmt->bindParam(':malop',$lop_id);
-  $stmt->bindParam(':makhoa',$khoa_id);
     
-  $stmt->execute();
+  $stmt->execute([$lop_id]);
   if ($stmt->rowCount() >= 1) {
     $baigiang = $stmt->fetchAll();
     return $baigiang;

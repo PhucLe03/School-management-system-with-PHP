@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 10:44 AM
+-- Generation Time: Nov 21, 2023 at 05:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `teaching_learning`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `baigiang`
+--
+
+CREATE TABLE `baigiang` (
+  `id` int(11) NOT NULL,
+  `id_lophoc` varchar(127) NOT NULL,
+  `tieude` text NOT NULL,
+  `noidung` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `baigiang`
+--
+
+INSERT INTO `baigiang` (`id`, `id_lophoc`, `tieude`, `noidung`) VALUES
+(1, '1', 'Bài 1', 'Giới thiệu môn học'),
+(2, '1', 'Bài 2', 'Mô hình ER'),
+(3, '1', 'Bài 3', 'Mô hình ER (tt)');
 
 -- --------------------------------------------------------
 
@@ -75,6 +97,7 @@ INSERT INTO `khoahoc` (`makhoahoc`, `tenkhoahoc`) VALUES
 --
 
 CREATE TABLE `lophoc` (
+  `id` int(11) NOT NULL,
   `malophoc` varchar(127) NOT NULL,
   `makhoahoc` varchar(127) NOT NULL,
   `magiangvien` varchar(127) NOT NULL
@@ -84,9 +107,10 @@ CREATE TABLE `lophoc` (
 -- Dumping data for table `lophoc`
 --
 
-INSERT INTO `lophoc` (`malophoc`, `makhoahoc`, `magiangvien`) VALUES
-('CN01', 'CO2013', 'GV-1'),
-('CN02', 'CO2013', 'GV-1');
+INSERT INTO `lophoc` (`id`, `malophoc`, `makhoahoc`, `magiangvien`) VALUES
+(1, 'CN01', 'CO2013', 'GV-1'),
+(2, 'CN01', 'CO3093', 'GV-2'),
+(3, 'CN02', 'CO2013', 'GV-1');
 
 -- --------------------------------------------------------
 
@@ -106,7 +130,8 @@ CREATE TABLE `lop_rec` (
 
 INSERT INTO `lop_rec` (`malophoc`, `makhoahoc`, `masinhvien`) VALUES
 ('CN01', 'CO2013', 'SV-1'),
-('CN01', 'CO2013', 'SV-2');
+('CN01', 'CO2013', 'SV-2'),
+('CN01', 'CO3093', 'SV-1');
 
 -- --------------------------------------------------------
 
@@ -141,6 +166,12 @@ INSERT INTO `sinhvien` (`masinhvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkha
 --
 
 --
+-- Indexes for table `baigiang`
+--
+ALTER TABLE `baigiang`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `giangvien`
 --
 ALTER TABLE `giangvien`
@@ -156,13 +187,36 @@ ALTER TABLE `khoahoc`
 -- Indexes for table `lophoc`
 --
 ALTER TABLE `lophoc`
-  ADD PRIMARY KEY (`malophoc`,`makhoahoc`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `malophoc` (`malophoc`,`makhoahoc`);
+
+--
+-- Indexes for table `lop_rec`
+--
+ALTER TABLE `lop_rec`
+  ADD PRIMARY KEY (`malophoc`,`makhoahoc`,`masinhvien`);
 
 --
 -- Indexes for table `sinhvien`
 --
 ALTER TABLE `sinhvien`
   ADD PRIMARY KEY (`masinhvien`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `baigiang`
+--
+ALTER TABLE `baigiang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `lophoc`
+--
+ALTER TABLE `lophoc`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

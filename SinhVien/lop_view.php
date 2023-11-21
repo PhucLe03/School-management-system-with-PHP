@@ -27,7 +27,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                     $khoahoc = getTenCuaKhoa($lophoc['makhoahoc'], $conn);
                     $tenkhoahoc = $khoahoc['tenkhoahoc'];
 
-                    $baigiang = getBaiGiangCuaLop($lophoc['malophoc'], $lophoc['makhoahoc'], $conn);
+                    $baigiang = getBaiGiangCuaLop($id_lophoc, $conn);
                     $id_gv = getGiangVienCuaLop($lophoc['malophoc'], $lophoc['makhoahoc'], $conn);
                     $giangvien = getGiangVienTheoId($id_gv['magiangvien'], $conn);
                     if ($giangvien['gioitinh'] = true) {
@@ -61,8 +61,13 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
             ?>
                 <div class="container mt-5">
                     <h1><?= $real_title ?></h1>
-
-
+                    <?php 
+                    foreach ($baigiang as $bg) {
+                    ?>
+                    <h1>
+                        <?= $bg['tieude'] ?>
+                    </h1>
+                    <?php }?>
                 <?php } else { ?>
                     <div class="alert alert-info .w-450 m-5" role="alert">
                         Không tìm thấy lớp!
