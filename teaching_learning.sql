@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 01:12 PM
+-- Generation Time: Nov 22, 2023 at 03:38 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,7 +51,6 @@ INSERT INTO `baigiang` (`id`, `id_lophoc`, `tieude`, `noidung`) VALUES
 --
 
 CREATE TABLE `diem` (
-  `id` int(11) NOT NULL,
   `id_lophoc` int(11) NOT NULL,
   `masinhvien` varchar(127) NOT NULL,
   `chuoi_diem` text NOT NULL
@@ -80,7 +79,7 @@ CREATE TABLE `giangvien` (
 --
 
 INSERT INTO `giangvien` (`magiangvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkhau`, `email`, `sdt`, `namsinh`, `gioitinh`) VALUES
-('GV-1', 'Giảng', 'Viên', 'giangvien', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'giangvien@hcmut.edu.vn', '0123456789', 1975, 1),
+('GV-1', 'Hiệu', 'Phó', 'hieupho', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'hieupho@hcmut.edu.vn', '0123456789', 1975, 1),
 ('GV-2', 'Hiệu', 'Trưởng', 'hieutruong', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'hieutruong@hcmut.edu.vn', '0123456789', 1974, 1);
 
 -- --------------------------------------------------------
@@ -185,12 +184,6 @@ ALTER TABLE `baigiang`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `diem`
---
-ALTER TABLE `diem`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `giangvien`
 --
 ALTER TABLE `giangvien`
@@ -231,12 +224,6 @@ ALTER TABLE `sinhvien`
 --
 ALTER TABLE `baigiang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `diem`
---
-ALTER TABLE `diem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `lophoc`

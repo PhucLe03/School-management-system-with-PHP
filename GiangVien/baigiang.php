@@ -1,19 +1,20 @@
 <?php
 session_start();
-if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id']) {
+if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']) {
 
-    if ($_SESSION['tucach'] == 'SinhVien') {
+    if ($_SESSION['tucach'] == 'GiangVien') {
         include "../controllers/includer.php";
 
-        $masinhvien = $_SESSION['masinhvien'];
-        $sinhvien = getSinhVienTheoId($masinhvien, $conn);
+        $magiangvien = $_SESSION['magiangvien'];
         $id_baigiang = $_GET['id'];
+        $giangvien = getGiangVienTheoId($magiangvien, $conn);
+
         $baigiang = getNoiDungBaiGiang($id_baigiang, $conn);
         if ($baigiang != 0) {
             $id_lophoc = $baigiang['id_lophoc'];
             $lophoc = getLopTheoId($id_lophoc, $conn);
             $khoahoc = 0;
-            $truycap = svKiemTraQuyenVaoLop($masinhvien, $id_lophoc, $conn);
+            $truycap = gvKiemTraQuyenVaoLop($magiangvien, $id_lophoc, $conn);
         } else {
             $lophoc = 0;
             $khoahoc = 0;
@@ -28,35 +29,24 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>
                 <?php
-                $tensinhvien = $sinhvien['ho_tenlot'] . " " . $sinhvien['ten'];
-                $usrname = "Sinh viên " . $tensinhvien;
+                $tengiangvien = $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
+                $usrname = "Giảng viên " . $tengiangvien;
 
                 if ($lophoc != 0) {
                     $khoahoc = getTenCuaKhoa($lophoc['makhoahoc'], $conn);
                     $tenkhoahoc = $khoahoc['tenkhoahoc'];
-
-                    $id_gv = getGiangVienCuaLop($id_lophoc, $conn);
-                    $giangvien = getGiangVienTheoId($id_gv['magiangvien'], $conn);
-                    if ($giangvien['gioitinh'] = true) {
-                        $gGV = "Thầy ";
-                    } else {
-                        $gGV = "Cô ";
-                    }
-                    $tengiangvien = $gGV . $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
                     $title = $tenkhoahoc . " - " . $lophoc['malophoc'];
 
-                    $real_title = $title . " - " . $tengiangvien;
+                    $real_title = $title;
                 } else {
                     $title = "Không tìm thấy lớp";
                 }
                 if ($truycap != true) {
                     $title = "Không thể truy cập vào lớp";
-                }
-                else if ($baigiang == 0) {
+                } else if ($baigiang == 0) {
                     $title = "Không tìm thấy bài giảng";
-                }
-                else {
-                    $title .= " - ".$baigiang['tieude'];
+                } else {
+                    $title .= " - " . $baigiang['tieude'];
                 }
                 include "../header.php";
                 ?>
@@ -99,6 +89,8 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                             </p>
                             <br />
                             <hr />
+                            <button class="btn btn-primary" style="background-color: dodgerblue;">Sửa</button>
+                            <button class="btn btn-primary" style="background-color: red;">Xóa</button>
 
                         <?php } else { ?>
                             <div class="alert alert-info" role="alert">

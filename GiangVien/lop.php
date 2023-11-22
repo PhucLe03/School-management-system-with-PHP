@@ -69,7 +69,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])) {
                                             $i++; ?>
                                         </th>
                                         <td>
-                                            <a href="index.php">
+                                            <a href="<?php echo gotoLop($lop['id'])?>">
                                                 <?= $tenlop; ?>
                                                 <br />
                                                 <?= $lop['malophoc'] ?>

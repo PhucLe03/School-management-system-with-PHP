@@ -80,7 +80,7 @@ if (
                     } else if ($tucach=="SinhVien") {
                         $id = $user['masinhvien'];
                         $_SESSION['masinhvien'] = $id;
-                        header("Location: ../Sinhvien/index.php");
+                        header("Location: ../SinhVien/index.php");
                         exit;
                     }
                 } else {

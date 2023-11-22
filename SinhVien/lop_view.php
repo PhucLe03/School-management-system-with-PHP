@@ -10,7 +10,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
         $id_lophoc = $_GET['id'];
         $lophoc = getLopTheoId($id_lophoc, $conn);
         $khoahoc = 0;
-        $truycap = kiemTraQuyenVaoLop($masinhvien, $id_lophoc, $conn);
+        $truycap = svKiemTraQuyenVaoLop($masinhvien, $id_lophoc, $conn);
 ?>
 
         <!DOCTYPE html>
@@ -66,7 +66,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                     if ($truycap != false) {
                         if ($baigiang != 0) {
                     ?>
-                            <!-- <h1>Bai Giang </h1> -->
+                            <!-- Bai Giang  -->
                             <table class="table table-sm table-bordered mt-3 n-table table-hover">
                                 <thead>
                                     <tr>
@@ -85,7 +85,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                                 $i++; ?>
                                             </th>
                                             <td scope="row">
-                                                <a href="<?php echo gotoBaiGiang($bg['id'],$id_lophoc) ?>">
+                                                <a href="<?php echo gotoBaiGiang($bg['id']) ?>">
                                                     <?= $bg['tieude'] ?>
                                                 </a>
                                             </td>
@@ -95,21 +95,57 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                     }
                                     ?>
                                 </tbody>
-                            <?php } else { ?>
-                                <div class="alert alert-info" role="alert">
-                                    Chưa có bài giảng.
-                                </div>
+                            </table>
+                            <?php
+                            $baitap = [0,1]; // getBaiTap
+                            if ($baitap != 0) {
+                            ?>
+                            <!-- Bai Tap  -->
+                            <table class="table table-sm table-bordered mt-3 n-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Bài tập</th>
+                                        <th scope="col">Tiêu đề</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $i = 1;
+                                    foreach ($baitap as $bt) {
+                                    ?>
+                                        <tr>
+                                            <th scope="row">
+                                                <?php echo $i;
+                                                $i++; ?>
+                                            </th>
+                                            <td scope="row">
+                                                <a href="<?php echo gotoBaiTap($bt['id']) ?>">
+                                                    <?= $bt['tieude'] ?>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                             <?php } ?>
                         <?php } else { ?>
                             <div class="alert alert-info" role="alert">
-                                Bạn chưa ghi danh vào lớp học này.
+                                Chưa có bài giảng.
                             </div>
                         <?php } ?>
                     <?php } else { ?>
-                        <div class="alert alert-info .w-450 m-5" role="alert">
-                            Không tìm thấy lớp!
+                        <div class="alert alert-info" role="alert">
+                            Bạn chưa ghi danh vào lớp học này.
                         </div>
                     <?php } ?>
+                <?php } else { ?>
+                    <div class="alert alert-info .w-450 m-5" role="alert">
+                        Không tìm thấy lớp!
+                    </div>
+                <?php } ?>
                 </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
