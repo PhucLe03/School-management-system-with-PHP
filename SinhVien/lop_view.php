@@ -28,7 +28,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                     $tenkhoahoc = $khoahoc['tenkhoahoc'];
 
                     $baigiang = getBaiGiangCuaLop($id_lophoc, $conn);
-                    $id_gv = getGiangVienCuaLop($lophoc['malophoc'], $lophoc['makhoahoc'], $conn);
+                    $id_gv = getGiangVienCuaLop($id_lophoc, $conn);
                     $giangvien = getGiangVienTheoId($id_gv['magiangvien'], $conn);
                     if ($giangvien['gioitinh'] = true) {
                         $gGV = "Thầy ";

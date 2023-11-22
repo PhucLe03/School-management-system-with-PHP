@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 05:01 PM
+-- Generation Time: Nov 22, 2023 at 02:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -119,8 +119,7 @@ INSERT INTO `lophoc` (`id`, `malophoc`, `makhoahoc`, `magiangvien`) VALUES
 --
 
 CREATE TABLE `lop_rec` (
-  `malophoc` varchar(127) NOT NULL,
-  `makhoahoc` varchar(127) NOT NULL,
+  `id_lophoc` int(11) NOT NULL,
   `masinhvien` varchar(127) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -128,10 +127,10 @@ CREATE TABLE `lop_rec` (
 -- Dumping data for table `lop_rec`
 --
 
-INSERT INTO `lop_rec` (`malophoc`, `makhoahoc`, `masinhvien`) VALUES
-('CN01', 'CO2013', 'SV-1'),
-('CN01', 'CO2013', 'SV-2'),
-('CN01', 'CO3093', 'SV-1');
+INSERT INTO `lop_rec` (`id_lophoc`, `masinhvien`) VALUES
+(1, 'SV-1'),
+(1, 'SV-2'),
+(2, 'SV-1');
 
 -- --------------------------------------------------------
 
@@ -188,13 +187,14 @@ ALTER TABLE `khoahoc`
 --
 ALTER TABLE `lophoc`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `malophoc` (`malophoc`,`makhoahoc`);
+  ADD UNIQUE KEY `malophoc` (`malophoc`,`makhoahoc`),
+  ADD UNIQUE KEY `malophoc_2` (`malophoc`,`makhoahoc`);
 
 --
 -- Indexes for table `lop_rec`
 --
 ALTER TABLE `lop_rec`
-  ADD PRIMARY KEY (`malophoc`,`makhoahoc`,`masinhvien`);
+  ADD PRIMARY KEY (`id_lophoc`,`masinhvien`);
 
 --
 -- Indexes for table `sinhvien`
@@ -216,7 +216,7 @@ ALTER TABLE `baigiang`
 -- AUTO_INCREMENT for table `lophoc`
 --
 ALTER TABLE `lophoc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

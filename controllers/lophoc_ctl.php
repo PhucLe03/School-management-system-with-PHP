@@ -1,12 +1,11 @@
 <?php
 
-function getSinhVienCuaLop($lop_id, $khoa_id, $conn)
+function getSinhVienCuaLop($lop_id, $conn)
 {
   $sql = "SELECT masinhvien FROM lop_rec
-          WHERE malophoc=:malop AND makhoahoc=:makhoa";
+          WHERE id_lophoc=:idlop";
   $stmt = $conn->prepare($sql);
-  $stmt->bindParam(':malop',$lop_id);
-  $stmt->bindParam(':makhoa',$khoa_id);
+  $stmt->bindParam(':idlop',$lop_id);
     
   $stmt->execute();
   if ($stmt->rowCount() >= 1) {
@@ -17,13 +16,12 @@ function getSinhVienCuaLop($lop_id, $khoa_id, $conn)
   }
 }
 
-function getSoLuongSinhVienCuaLop($lop_id, $khoa_id, $conn)
+function getSoLuongSinhVienCuaLop($lop_id, $conn)
 {
   $sql = "SELECT masinhvien FROM lop_rec
-          WHERE malophoc=:malop AND makhoahoc=:makhoa";
+          WHERE id_lophoc=:idlop";
   $stmt = $conn->prepare($sql);
-  $stmt->bindParam(':malop',$lop_id);
-  $stmt->bindParam(':makhoa',$khoa_id);
+  $stmt->bindParam(':idlop',$lop_id);
     
   $stmt->execute();
   if ($stmt->rowCount() >= 1) {
@@ -33,14 +31,12 @@ function getSoLuongSinhVienCuaLop($lop_id, $khoa_id, $conn)
   }
 }
 
-function getGiangVienCuaLop($lop_id, $khoa_id, $conn)
+function getGiangVienCuaLop($lop_id, $conn)
 {
-  // ! WARNING: DO NOT TOUCH THIS
-  $sql = "SELECT id,magiangvien FROM lophoc
-          WHERE malophoc=:malop AND makhoahoc=:makhoa";
+  $sql = "SELECT magiangvien FROM lophoc
+          WHERE id=:idlop";
   $stmt = $conn->prepare($sql);
-  $stmt->bindParam(':malop',$lop_id);
-  $stmt->bindParam(':makhoa',$khoa_id);
+  $stmt->bindParam(':idlop',$lop_id);
     
   $stmt->execute();
   if ($stmt->rowCount() == 1) {
@@ -53,7 +49,7 @@ function getGiangVienCuaLop($lop_id, $khoa_id, $conn)
 
 function getLopCuaSinhVien($sinhvien_id, $conn)
 {
-  $sql = "SELECT malophoc,makhoahoc FROM lop_rec
+  $sql = "SELECT * FROM lop_rec
           WHERE masinhvien=?";
   $stmt = $conn->prepare($sql);    
   $stmt->execute([$sinhvien_id]);

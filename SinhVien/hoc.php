@@ -56,12 +56,13 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 0;
-                                foreach ($lophoc as $lop) {
+                                <?php $i = 1;
+                                foreach ($lophoc as $cailop) {
+                                    $lop = getLopTheoId($cailop['id_lophoc'], $conn);
                                     $tenkhoa = getTenCuaKhoa($lop['makhoahoc'], $conn);
                                     $tenkhoa = $tenkhoa['tenkhoahoc'];
                                     $tenlop = $tenkhoa . " (" . $lop['makhoahoc'] . ")";
-                                    $gv = getGiangVienCuaLop($lop['malophoc'], $lop['makhoahoc'], $conn);
+                                    $gv = getGiangVienCuaLop($cailop['id_lophoc'], $conn);
                                     $giangvien = getGiangVienTheoId($gv['magiangvien'], $conn);
                                     $gGV_tmp = $giangvien['gioitinh'];
                                     if ($gGV_tmp == true) {
@@ -69,7 +70,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach'])) {
                                     } else {
                                         $gGV = "Cô ";
                                     }
-                                    $id_ = $gv['id'];
+                                    $id_ = $cailop['id_lophoc'];
                                     $tengiangvien = $gGV . $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
                                 ?>
                                     <tr>

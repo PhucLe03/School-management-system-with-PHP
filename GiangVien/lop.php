@@ -25,6 +25,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])) {
                 <?php
                 $tengiangvien = $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
                 $title = "Giảng viên " . $tengiangvien;
+                $usrname = $title;
                 include "../header.php";
                 ?>
             </title>
@@ -55,12 +56,12 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 0;
+                                <?php $i = 1;
                                 foreach ($lophoc as $lop) {
                                     $tenkhoa = getTenCuaKhoa($lop['makhoahoc'], $conn);
                                     $tenkhoa = $tenkhoa['tenkhoahoc'];
                                     $tenlop = $tenkhoa . " (" . $lop['makhoahoc'] . ")";
-                                    $soluong = getSoLuongSinhVienCuaLop($lop['malophoc'], $lop['makhoahoc'], $conn);
+                                    $soluong = getSoLuongSinhVienCuaLop($lop['id'], $conn);
                                 ?>
                                     <tr>
                                         <th scope="row">
