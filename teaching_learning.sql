@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 03:38 PM
+-- Generation Time: Nov 22, 2023 at 05:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `baigiang` (
   `id` int(11) NOT NULL,
-  `id_lophoc` varchar(127) NOT NULL,
+  `id_lophoc` int(11) NOT NULL,
   `tieude` text NOT NULL,
   `noidung` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -39,10 +39,10 @@ CREATE TABLE `baigiang` (
 --
 
 INSERT INTO `baigiang` (`id`, `id_lophoc`, `tieude`, `noidung`) VALUES
-(1, '1', 'Bài 1', 'Giới thiệu môn học'),
-(2, '1', 'Bài 2', 'Mô hình ER'),
-(3, '1', 'Bài 3', 'Mô hình ER (tt)'),
-(4, '3', 'Bài 1', 'Giới thiệu môn học');
+(1, 1, 'Bài 1', 'Giới thiệu môn học'),
+(2, 1, 'Bài 2', 'Mô hình ER'),
+(3, 1, 'Bài 3', 'Mô hình ER (tt)'),
+(4, 3, 'Bài 1', 'Giới thiệu môn học');
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,8 @@ CREATE TABLE `lop_rec` (
 INSERT INTO `lop_rec` (`id_lophoc`, `masinhvien`) VALUES
 (1, 'SV-1'),
 (1, 'SV-2'),
-(2, 'SV-1');
+(2, 'SV-1'),
+(2, 'SV-3');
 
 -- --------------------------------------------------------
 
@@ -181,7 +182,8 @@ INSERT INTO `sinhvien` (`masinhvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkha
 -- Indexes for table `baigiang`
 --
 ALTER TABLE `baigiang`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_lophoc` (`id_lophoc`);
 
 --
 -- Indexes for table `giangvien`
@@ -201,13 +203,16 @@ ALTER TABLE `khoahoc`
 ALTER TABLE `lophoc`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `malophoc` (`malophoc`,`makhoahoc`),
-  ADD UNIQUE KEY `malophoc_2` (`malophoc`,`makhoahoc`);
+  ADD UNIQUE KEY `malophoc_2` (`malophoc`,`makhoahoc`),
+  ADD KEY `makhoahoc` (`makhoahoc`),
+  ADD KEY `magiangvien` (`magiangvien`);
 
 --
 -- Indexes for table `lop_rec`
 --
 ALTER TABLE `lop_rec`
-  ADD PRIMARY KEY (`id_lophoc`,`masinhvien`);
+  ADD PRIMARY KEY (`id_lophoc`,`masinhvien`),
+  ADD KEY `masinhvien` (`masinhvien`);
 
 --
 -- Indexes for table `sinhvien`
@@ -223,13 +228,37 @@ ALTER TABLE `sinhvien`
 -- AUTO_INCREMENT for table `baigiang`
 --
 ALTER TABLE `baigiang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `lophoc`
 --
 ALTER TABLE `lophoc`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `baigiang`
+--
+ALTER TABLE `baigiang`
+  ADD CONSTRAINT `baigiang_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id`);
+
+--
+-- Constraints for table `lophoc`
+--
+ALTER TABLE `lophoc`
+  ADD CONSTRAINT `lophoc_ibfk_1` FOREIGN KEY (`makhoahoc`) REFERENCES `khoahoc` (`makhoahoc`),
+  ADD CONSTRAINT `lophoc_ibfk_2` FOREIGN KEY (`magiangvien`) REFERENCES `giangvien` (`magiangvien`);
+
+--
+-- Constraints for table `lop_rec`
+--
+ALTER TABLE `lop_rec`
+  ADD CONSTRAINT `lop_rec_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id`),
+  ADD CONSTRAINT `lop_rec_ibfk_2` FOREIGN KEY (`masinhvien`) REFERENCES `sinhvien` (`masinhvien`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
