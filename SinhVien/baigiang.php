@@ -7,10 +7,17 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
 
         $masinhvien = $_SESSION['masinhvien'];
         $sinhvien = getSinhVienTheoId($masinhvien, $conn);
-        $id_lophoc = $_GET['id'];
-        $lophoc = getLopTheoId($id_lophoc, $conn);
-        $khoahoc = 0;
-        $truycap = kiemTraQuyenVaoLop($masinhvien, $id_lophoc, $conn);
+        $id_baigiang = $_GET['id'];
+        $baigiang = getNoiDungBaiGiang($id_baigiang, $conn);
+        if ($baigiang != 0) {
+            $id_lophoc = $baigiang['id_lophoc'];
+            $lophoc = getLopTheoId($id_lophoc, $conn);
+            $khoahoc = 0;
+            $truycap = kiemTraQuyenVaoLop($masinhvien, $id_lophoc, $conn);
+        } else {
+            $lophoc = 0;
+            $khoahoc = 0;
+        }
 ?>
 
         <!DOCTYPE html>
@@ -28,7 +35,6 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                     $khoahoc = getTenCuaKhoa($lophoc['makhoahoc'], $conn);
                     $tenkhoahoc = $khoahoc['tenkhoahoc'];
 
-                    $baigiang = getBaiGiangCuaLop($id_lophoc, $conn);
                     $id_gv = getGiangVienCuaLop($id_lophoc, $conn);
                     $giangvien = getGiangVienTheoId($id_gv['magiangvien'], $conn);
                     if ($giangvien['gioitinh'] = true) {
@@ -42,6 +48,9 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                     $real_title = $title . " - " . $tengiangvien;
                 } else {
                     $title = "Không tìm thấy lớp";
+                }
+                if ($baigiang == 0) {
+                    $title = "Không tìm thấy bài giảng";
                 }
                 include "../header.php";
                 ?>
@@ -61,55 +70,42 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
             if ($khoahoc != 0) {
             ?>
                 <div class="container mt-5">
-                    <h1><?= $real_title ?></h1>
                     <?php
                     if ($truycap != false) {
-                        if ($baigiang != 0) {
                     ?>
-                            <!-- <h1>Bai Giang </h1> -->
-                            <table class="table table-sm table-bordered mt-3 n-table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Bài giảng</th>
-                                        <th scope="col">Tiêu đề</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $i = 1;
-                                    foreach ($baigiang as $bg) {
-                                    ?>
-                                        <tr>
-                                            <th scope="row">
-                                                <?php echo $i;
-                                                $i++; ?>
-                                            </th>
-                                            <td scope="row">
-                                                <a href="<?php echo gotoBaiGiang($bg['id'],$id_lophoc) ?>">
-                                                    <?= $bg['tieude'] ?>
-                                                </a>
-                                            </td>
+                        <?php
+                        if ($baigiang != 0) {
+                        ?>
+                            <h1><?= $baigiang['tieude'] ?></h1>
+                            <a href="<?php echo gotoLop($id_lophoc) ?>">
+                                <?= $real_title ?>
+                            </a>
+                            / <a style="color:darkslategrey;">
+                                <?= $baigiang['tieude'] ?>
+                            </a>
+                            <!-- Bai Giang  -->
+                            <br />
+                            <br />
+                            <br />
+                            <p>
+                                <?= $baigiang['noidung'] ?>
+                            </p>
 
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            <?php } else { ?>
-                                <div class="alert alert-info" role="alert">
-                                    Chưa có bài giảng.
-                                </div>
-                            <?php } ?>
                         <?php } else { ?>
                             <div class="alert alert-info" role="alert">
-                                Bạn chưa ghi danh vào lớp học này.
+                                Chưa có bài giảng.
                             </div>
                         <?php } ?>
                     <?php } else { ?>
-                        <div class="alert alert-info .w-450 m-5" role="alert">
-                            Không tìm thấy lớp!
+                        <div class="alert alert-info" role="alert">
+                            Bạn chưa ghi danh vào lớp học này.
                         </div>
                     <?php } ?>
+                <?php } else { ?>
+                    <div class="alert alert-info .w-450 m-5" role="alert">
+                        Không tìm thấy bài giảng!
+                    </div>
+                <?php } ?>
                 </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

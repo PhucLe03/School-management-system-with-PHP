@@ -75,6 +75,20 @@ function getTenCuaKhoa($khoa_id, $conn) {
   }
 }
 
+function kiemTraQuyenVaoLop($id_sv, $id_lophoc, $conn) {
+  $sql = "SELECT * from lop_rec
+          WHERE id_lophoc=:lop AND masinhvien=:sv";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':lop',$id_lophoc);
+  $stmt->bindParam(':sv',$id_sv);
+  $stmt->execute();
+  if ($stmt->rowCount()<1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function getLopTheoId($id, $conn) {
   $sql = "SELECT malophoc,makhoahoc FROM lophoc
           WHERE id=?";
@@ -104,8 +118,8 @@ function getBaiGiangCuaLop($lop_id, $conn) {
 }
 
 function getNoiDungBaiGiang($baigiang_id, $conn) {
-  $sql = "SELECT tieude,noidung FROM baigiang
-          WHERE malophoc=:id";
+  $sql = "SELECT * FROM baigiang
+          WHERE id=:id";
   $stmt = $conn->prepare($sql);
   $stmt->bindParam(':id',$baigiang_id);
     

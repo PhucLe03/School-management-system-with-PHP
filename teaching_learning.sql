@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 02:02 AM
+-- Generation Time: Nov 22, 2023 at 01:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,21 @@ CREATE TABLE `baigiang` (
 INSERT INTO `baigiang` (`id`, `id_lophoc`, `tieude`, `noidung`) VALUES
 (1, '1', 'Bài 1', 'Giới thiệu môn học'),
 (2, '1', 'Bài 2', 'Mô hình ER'),
-(3, '1', 'Bài 3', 'Mô hình ER (tt)');
+(3, '1', 'Bài 3', 'Mô hình ER (tt)'),
+(4, '3', 'Bài 1', 'Giới thiệu môn học');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diem`
+--
+
+CREATE TABLE `diem` (
+  `id` int(11) NOT NULL,
+  `id_lophoc` int(11) NOT NULL,
+  `masinhvien` varchar(127) NOT NULL,
+  `chuoi_diem` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -171,6 +185,12 @@ ALTER TABLE `baigiang`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `diem`
+--
+ALTER TABLE `diem`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `giangvien`
 --
 ALTER TABLE `giangvien`
@@ -210,7 +230,13 @@ ALTER TABLE `sinhvien`
 -- AUTO_INCREMENT for table `baigiang`
 --
 ALTER TABLE `baigiang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `diem`
+--
+ALTER TABLE `diem`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `lophoc`
