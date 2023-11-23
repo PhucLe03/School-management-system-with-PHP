@@ -97,7 +97,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                 </tbody>
                             </table>
                             <?php
-                            $baitap = [0,1]; // getBaiTap
+                            $baitap = getBaiTapCuaLop($id_lophoc,$conn); // getBaiTap
                             if ($baitap != 0) {
                             ?>
                             <!-- Bai Tap  -->

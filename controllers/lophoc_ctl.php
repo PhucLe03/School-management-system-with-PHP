@@ -146,3 +146,34 @@ function getNoiDungBaiGiang($baigiang_id, $conn) {
   }
 }
 
+function getBaiTapCuaLop($lop_id, $conn) {
+  $sql = "SELECT id,tieude FROM baitap
+          WHERE id_lophoc=?";
+  $stmt = $conn->prepare($sql);
+    
+  $stmt->execute([$lop_id]);
+  if ($stmt->rowCount() >= 1) {
+    $baigiang = $stmt->fetchAll();
+    return $baigiang;
+  } else {
+    return 0;
+  }
+}
+
+function getBaiTapTheoId($baitap_id, $conn) {
+  $sql = "SELECT * FROM baitap
+          WHERE id=:id";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':id',$baitap_id);
+    
+  $stmt->execute();
+  if ($stmt->rowCount() == 1) {
+    $baigiang = $stmt->fetch();
+    return $baigiang;
+  } else {
+    return 0;
+  }
+}
+
+
+

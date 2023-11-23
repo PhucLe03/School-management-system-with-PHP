@@ -67,10 +67,15 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                     <h1><?= $real_title ?></h1>
                     <?php
                     if ($truycap != false) {
+                        ?>
+                        <button class="btn btn-primary">Thêm bài giảng</button>
+                        <button class="btn btn-primary">Thêm bài tập</button>
+                        <button class="btn btn-primary">Tạo/Sửa bài kiểm tra</button>
+                        <button class="btn btn-primary">Xem danh sách sinh viên</button>
+                        
+                        <?php
                         if ($baigiang != 0) {
-                    ?>
-                    <button class="btn btn-primary">Thêm bài giảng</button>
-                    <button class="btn btn-primary">Xem danh sách sinh viên</button>
+                            ?>
                             <div class="table-responsive">
                                 <table class="table table-sm table-bordered mt-3 n-table table-hover">
                                     <thead>
