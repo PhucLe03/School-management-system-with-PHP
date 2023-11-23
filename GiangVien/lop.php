@@ -61,7 +61,8 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])) {
                                     $tenkhoa = getTenCuaKhoa($lop['makhoahoc'], $conn);
                                     $tenkhoa = $tenkhoa['tenkhoahoc'];
                                     $tenlop = $tenkhoa . " (" . $lop['makhoahoc'] . ")";
-                                    $soluong = getSoLuongSinhVienCuaLop($lop['id'], $conn);
+                                    $id_lop = $lop['id_c'];
+                                    $soluong = getSoLuongSinhVienCuaLop($id_lop, $conn);
                                 ?>
                                     <tr>
                                         <th scope="row">
@@ -69,7 +70,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])) {
                                             $i++; ?>
                                         </th>
                                         <td>
-                                            <a href="<?php echo gotoLop($lop['id'])?>">
+                                            <a href="<?php echo gotoLop($id_lop)?>">
                                                 <?= $tenlop; ?>
                                                 <br />
                                                 <?= $lop['malophoc'] ?>

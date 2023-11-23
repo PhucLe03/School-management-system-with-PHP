@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 05:44 PM
+-- Generation Time: Nov 23, 2023 at 04:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `teaching_learning`
+-- Database: `learning_teaching`
 --
 
 -- --------------------------------------------------------
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `baigiang` (
-  `id` int(11) NOT NULL,
+  `id_l` int(11) NOT NULL,
   `id_lophoc` int(11) NOT NULL,
   `tieude` text NOT NULL,
   `noidung` mediumtext NOT NULL
@@ -38,23 +38,32 @@ CREATE TABLE `baigiang` (
 -- Dumping data for table `baigiang`
 --
 
-INSERT INTO `baigiang` (`id`, `id_lophoc`, `tieude`, `noidung`) VALUES
+INSERT INTO `baigiang` (`id_l`, `id_lophoc`, `tieude`, `noidung`) VALUES
 (1, 1, 'Bài 1', 'Giới thiệu môn học'),
 (2, 1, 'Bài 2', 'Mô hình ER'),
 (3, 1, 'Bài 3', 'Mô hình ER (tt)'),
-(4, 3, 'Bài 1', 'Giới thiệu môn học');
+(4, 3, 'Bài 1', 'Giới thiệu môn học'),
+(6, 2, 'Bài 1', 'Giới thiệu môn học');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `diem`
+-- Table structure for table `baitap`
 --
 
-CREATE TABLE `diem` (
+CREATE TABLE `baitap` (
+  `id_e` int(11) NOT NULL,
   `id_lophoc` int(11) NOT NULL,
-  `masinhvien` varchar(127) NOT NULL,
-  `chuoi_diem` text NOT NULL
+  `tieude` text NOT NULL,
+  `noidung` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `baitap`
+--
+
+INSERT INTO `baitap` (`id_e`, `id_lophoc`, `tieude`, `noidung`) VALUES
+(1, 1, 'Bài tập 1', 'Làm bài tập 1');
 
 -- --------------------------------------------------------
 
@@ -106,11 +115,32 @@ INSERT INTO `khoahoc` (`makhoahoc`, `tenkhoahoc`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kiemtra`
+--
+
+CREATE TABLE `kiemtra` (
+  `id_t` int(11) NOT NULL,
+  `id_lophoc` int(11) NOT NULL,
+  `tieude` text NOT NULL,
+  `noidung` mediumtext NOT NULL,
+  `thoigian` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kiemtra`
+--
+
+INSERT INTO `kiemtra` (`id_t`, `id_lophoc`, `tieude`, `noidung`, `thoigian`) VALUES
+(1, 1, 'Bài tập 1', 'Làm bài tập 1', 60);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lophoc`
 --
 
 CREATE TABLE `lophoc` (
-  `id` int(11) NOT NULL,
+  `id_c` int(11) NOT NULL,
   `malophoc` varchar(127) NOT NULL,
   `makhoahoc` varchar(127) NOT NULL,
   `magiangvien` varchar(127) NOT NULL
@@ -120,10 +150,12 @@ CREATE TABLE `lophoc` (
 -- Dumping data for table `lophoc`
 --
 
-INSERT INTO `lophoc` (`id`, `malophoc`, `makhoahoc`, `magiangvien`) VALUES
+INSERT INTO `lophoc` (`id_c`, `malophoc`, `makhoahoc`, `magiangvien`) VALUES
 (1, 'CN01', 'CO2013', 'GV-1'),
 (2, 'CN01', 'CO3093', 'GV-2'),
-(3, 'CN02', 'CO2013', 'GV-1');
+(3, 'CN02', 'CO2013', 'GV-1'),
+(6, 'CN03', 'CO3005', 'GV-1'),
+(7, 'CN04', 'CO3005', 'GV-1');
 
 -- --------------------------------------------------------
 
@@ -133,6 +165,7 @@ INSERT INTO `lophoc` (`id`, `malophoc`, `makhoahoc`, `magiangvien`) VALUES
 
 CREATE TABLE `lop_rec` (
   `id_lophoc` int(11) NOT NULL,
+  `makhoahoc` varchar(127) NOT NULL,
   `masinhvien` varchar(127) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -140,11 +173,13 @@ CREATE TABLE `lop_rec` (
 -- Dumping data for table `lop_rec`
 --
 
-INSERT INTO `lop_rec` (`id_lophoc`, `masinhvien`) VALUES
-(1, 'SV-1'),
-(1, 'SV-2'),
-(2, 'SV-1'),
-(2, 'SV-3');
+INSERT INTO `lop_rec` (`id_lophoc`, `makhoahoc`, `masinhvien`) VALUES
+(1, 'CO2013', 'SV-1'),
+(1, 'CO2013', 'SV-2'),
+(1, 'CO2013', 'SV-3'),
+(2, 'CO3093', 'SV-1'),
+(2, 'CO3093', 'SV-3'),
+(6, 'CO3005', 'SV-1');
 
 -- --------------------------------------------------------
 
@@ -170,9 +205,9 @@ CREATE TABLE `sinhvien` (
 
 INSERT INTO `sinhvien` (`masinhvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkhau`, `email`, `sdt`, `namsinh`, `gioitinh`) VALUES
 ('SV-1', 'Lê Hoàng', 'Phúc', 'phuc.le1103', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1),
-('SV-2', 'Lê Hoàng', 'Phúc 1', 'phucle03_1', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1),
-('SV-3', 'Lê Hoàng', 'Phúc 2', 'phucle03_2', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1),
-('SV-4', 'Lê Hoàng', 'Phúc 3', 'phucle03_3', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'phuc.le1103@hcmut.edu.vn', '0123456789', 2003, 1);
+('SV-2', 'Nguyễn Hoàng Khôi', 'Nguyên 1', 'nguyen.nguyenbku', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'nguyen.nguyenbku@hcmut.edu.vn', '0123456789', 2003, 1),
+('SV-3', 'Sinh', 'Viên 1', 'sinhvien1', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'sinhvien1@hcmut.edu.vn', '0123456789', 2003, 1),
+('SV-4', 'Sinh', 'Viên 2', 'sinhvien2', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'sinhvien2@hcmut.edu.vn', '0123456789', 2003, 1);
 
 --
 -- Indexes for dumped tables
@@ -182,8 +217,15 @@ INSERT INTO `sinhvien` (`masinhvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkha
 -- Indexes for table `baigiang`
 --
 ALTER TABLE `baigiang`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_lophoc` (`id_lophoc`);
+  ADD PRIMARY KEY (`id_l`),
+  ADD KEY `baigiang_ibfk_1` (`id_lophoc`);
+
+--
+-- Indexes for table `baitap`
+--
+ALTER TABLE `baitap`
+  ADD PRIMARY KEY (`id_e`),
+  ADD KEY `baitap_ibfk_1` (`id_lophoc`);
 
 --
 -- Indexes for table `giangvien`
@@ -198,21 +240,28 @@ ALTER TABLE `khoahoc`
   ADD PRIMARY KEY (`makhoahoc`);
 
 --
+-- Indexes for table `kiemtra`
+--
+ALTER TABLE `kiemtra`
+  ADD PRIMARY KEY (`id_t`),
+  ADD KEY `kiemtra_ibfk_1` (`id_lophoc`);
+
+--
 -- Indexes for table `lophoc`
 --
 ALTER TABLE `lophoc`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `malophoc` (`malophoc`,`makhoahoc`),
-  ADD UNIQUE KEY `malophoc_2` (`malophoc`,`makhoahoc`),
-  ADD KEY `makhoahoc` (`makhoahoc`),
-  ADD KEY `magiangvien` (`magiangvien`);
+  ADD PRIMARY KEY (`id_c`),
+  ADD UNIQUE KEY `malophoc_1` (`malophoc`,`makhoahoc`,`magiangvien`),
+  ADD KEY `lophoc_ibfk_1` (`makhoahoc`),
+  ADD KEY `lophoc_ibfk_2` (`magiangvien`);
 
 --
 -- Indexes for table `lop_rec`
 --
 ALTER TABLE `lop_rec`
-  ADD PRIMARY KEY (`id_lophoc`,`masinhvien`),
-  ADD KEY `masinhvien` (`masinhvien`);
+  ADD PRIMARY KEY (`id_lophoc`,`makhoahoc`,`masinhvien`),
+  ADD UNIQUE KEY `makhoahoc` (`makhoahoc`,`masinhvien`),
+  ADD KEY `lop_rec_ibfk_2` (`masinhvien`);
 
 --
 -- Indexes for table `sinhvien`
@@ -228,13 +277,25 @@ ALTER TABLE `sinhvien`
 -- AUTO_INCREMENT for table `baigiang`
 --
 ALTER TABLE `baigiang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_l` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `baitap`
+--
+ALTER TABLE `baitap`
+  MODIFY `id_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `kiemtra`
+--
+ALTER TABLE `kiemtra`
+  MODIFY `id_t` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lophoc`
 --
 ALTER TABLE `lophoc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_c` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -244,7 +305,19 @@ ALTER TABLE `lophoc`
 -- Constraints for table `baigiang`
 --
 ALTER TABLE `baigiang`
-  ADD CONSTRAINT `baigiang_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id`);
+  ADD CONSTRAINT `baigiang_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id_c`);
+
+--
+-- Constraints for table `baitap`
+--
+ALTER TABLE `baitap`
+  ADD CONSTRAINT `baitap_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id_c`);
+
+--
+-- Constraints for table `kiemtra`
+--
+ALTER TABLE `kiemtra`
+  ADD CONSTRAINT `kiemtra_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id_c`);
 
 --
 -- Constraints for table `lophoc`
@@ -257,8 +330,9 @@ ALTER TABLE `lophoc`
 -- Constraints for table `lop_rec`
 --
 ALTER TABLE `lop_rec`
-  ADD CONSTRAINT `lop_rec_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id`),
-  ADD CONSTRAINT `lop_rec_ibfk_2` FOREIGN KEY (`masinhvien`) REFERENCES `sinhvien` (`masinhvien`);
+  ADD CONSTRAINT `lop_rec_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id_c`),
+  ADD CONSTRAINT `lop_rec_ibfk_2` FOREIGN KEY (`masinhvien`) REFERENCES `sinhvien` (`masinhvien`),
+  ADD CONSTRAINT `lop_rec_ibfk_3` FOREIGN KEY (`makhoahoc`) REFERENCES `lophoc` (`makhoahoc`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -85,7 +85,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                                 $i++; ?>
                                             </th>
                                             <td scope="row">
-                                                <a href="<?php echo gotoBaiGiang($bg['id']) ?>">
+                                                <a href="<?php echo gotoBaiGiang($bg['id_l']) ?>">
                                                     <?= $bg['tieude'] ?>
                                                 </a>
                                             </td>
@@ -119,7 +119,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                                 $i++; ?>
                                             </th>
                                             <td scope="row">
-                                                <a href="<?php echo gotoBaiTap($bt['id']) ?>">
+                                                <a href="<?php echo gotoBaiTap($bt['id_e']) ?>">
                                                     <?= $bt['tieude'] ?>
                                                 </a>
                                             </td>

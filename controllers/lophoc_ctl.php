@@ -34,7 +34,7 @@ function getSoLuongSinhVienCuaLop($lop_id, $conn)
 function getGiangVienCuaLop($lop_id, $conn)
 {
   $sql = "SELECT magiangvien FROM lophoc
-          WHERE id=:idlop";
+          WHERE id_c=:idlop";
   $stmt = $conn->prepare($sql);
   $stmt->bindParam(':idlop',$lop_id);
     
@@ -91,7 +91,7 @@ function svKiemTraQuyenVaoLop($id_sv, $id_lophoc, $conn) {
 
 function gvKiemTraQuyenVaoLop($magv, $id_lophoc, $conn) {
   $sql = "SELECT * from lophoc
-          WHERE id=:lop AND magiangvien=:gv";
+          WHERE id_c=:lop AND magiangvien=:gv";
   $stmt = $conn->prepare($sql);
   $stmt->bindParam(':lop',$id_lophoc);
   $stmt->bindParam(':gv',$magv);
@@ -105,7 +105,7 @@ function gvKiemTraQuyenVaoLop($magv, $id_lophoc, $conn) {
 
 function getLopTheoId($id, $conn) {
   $sql = "SELECT malophoc,makhoahoc FROM lophoc
-          WHERE id=?";
+          WHERE id_c=?";
   $stmt = $conn->prepare($sql);    
   $stmt->execute([$id]);
 
@@ -118,7 +118,7 @@ function getLopTheoId($id, $conn) {
 }
 
 function getBaiGiangCuaLop($lop_id, $conn) {
-  $sql = "SELECT id,tieude FROM baigiang
+  $sql = "SELECT id_l,tieude FROM baigiang
           WHERE id_lophoc=?";
   $stmt = $conn->prepare($sql);
     
@@ -133,7 +133,7 @@ function getBaiGiangCuaLop($lop_id, $conn) {
 
 function getNoiDungBaiGiang($baigiang_id, $conn) {
   $sql = "SELECT * FROM baigiang
-          WHERE id=:id";
+          WHERE id_l=:id";
   $stmt = $conn->prepare($sql);
   $stmt->bindParam(':id',$baigiang_id);
     
@@ -147,7 +147,7 @@ function getNoiDungBaiGiang($baigiang_id, $conn) {
 }
 
 function getBaiTapCuaLop($lop_id, $conn) {
-  $sql = "SELECT id,tieude FROM baitap
+  $sql = "SELECT id_e,tieude FROM baitap
           WHERE id_lophoc=?";
   $stmt = $conn->prepare($sql);
     
@@ -162,7 +162,7 @@ function getBaiTapCuaLop($lop_id, $conn) {
 
 function getBaiTapTheoId($baitap_id, $conn) {
   $sql = "SELECT * FROM baitap
-          WHERE id=:id";
+          WHERE id_e=:id";
   $stmt = $conn->prepare($sql);
   $stmt->bindParam(':id',$baitap_id);
     

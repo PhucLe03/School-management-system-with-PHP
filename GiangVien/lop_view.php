@@ -95,7 +95,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                                     $i++; ?>
                                                 </th>
                                                 <td scope="row">
-                                                    <a href="<?php echo gotoBaiGiang($bg['id']) ?>">
+                                                    <a href="<?php echo gotoBaiGiang($bg['id_l']) ?>">
                                                         <?= $bg['tieude'] ?>
                                                     </a>
                                                 </td>

@@ -17,7 +17,7 @@ function getGiangVienTheoId($giangvien_id, $conn)
 
 function getLopCuaGiangVien($giangvien_id, $conn)
 {
-  $sql = "SELECT id,malophoc,makhoahoc FROM lophoc
+  $sql = "SELECT id_c,malophoc,makhoahoc FROM lophoc
           WHERE magiangvien=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$giangvien_id]);
