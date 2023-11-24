@@ -49,11 +49,11 @@ if (
                     WHERE tendangnhap = ?";
             $tucach = "Admin";
         } else if ($role=="GV") {
-            $sql = "SELECT * FROM giangvien 
+            $sql = "SELECT * FROM login_gv 
                     WHERE tendangnhap = ?";
             $tucach = "GiangVien";
         } else if ($role=="SV") {
-            $sql = "SELECT * FROM sinhvien 
+            $sql = "SELECT * FROM login_sv 
                     WHERE tendangnhap = ?";
             $tucach = "SinhVien";
         }

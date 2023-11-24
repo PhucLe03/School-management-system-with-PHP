@@ -83,3 +83,18 @@ function XacMinhMatKhauSinhVien($sinhvien_mk, $conn, $masinhvien)
     return 0;
   }
 }
+
+
+function getInfoSV($id, $conn) {
+  $sql = "SELECT * FROM in4sinhvien
+           WHERE masinhvien=?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$id]);
+
+  if ($stmt->rowCount() == 1) {
+    $sinhvien = $stmt->fetch();
+    return $sinhvien;
+  } else {
+    return 0;
+  }
+}

@@ -7,7 +7,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach'])) {
 
         $masinhvien = $_SESSION['masinhvien'];
 
-        $sinhvien = getSinhVienTheoId($masinhvien, $conn);
+        $sinhvien = getInfoSV($masinhvien, $conn);
         $lophoc = getLopCuaSinhVien($masinhvien, $conn);
         // $gioitinh = "Nam";
         // if ($sinhvien['gioitinh'] == 0) {
@@ -57,21 +57,16 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach'])) {
                             </thead>
                             <tbody>
                                 <?php $i = 1;
-                                foreach ($lophoc as $cailop) {
-                                    $lop = getLopTheoId($cailop['id_lophoc'], $conn);
-                                    $tenkhoa = getTenCuaKhoa($lop['makhoahoc'], $conn);
-                                    $tenkhoa = $tenkhoa['tenkhoahoc'];
-                                    $tenlop = $tenkhoa . " (" . $lop['makhoahoc'] . ")";
-                                    $gv = getGiangVienCuaLop($cailop['id_lophoc'], $conn);
-                                    $giangvien = getGiangVienTheoId($gv['magiangvien'], $conn);
-                                    $gGV_tmp = $giangvien['gioitinh'];
+                                foreach ($lophoc as $lop) {
+                                    $tenlop = $lop['tenkhoahoc']." (".$lop['makhoahoc'].")";
+                                    $gGV_tmp = $lop['gtgv'];
                                     if ($gGV_tmp == true) {
                                         $gGV = "Thầy ";
                                     } else {
                                         $gGV = "Cô ";
                                     }
-                                    $id_ = $cailop['id_lophoc'];
-                                    $tengiangvien = $gGV . $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
+                                    $id_ = $lop['id_c'];
+                                    $tengiangvien = $gGV . $lop['ho_gv'] . " " . $lop['ten_gv'];
                                 ?>
                                     <tr>
                                         <th scope="row">

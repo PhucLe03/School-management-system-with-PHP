@@ -6,7 +6,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
         include "../controllers/includer.php";
 
         $masinhvien = $_SESSION['masinhvien'];
-        $sinhvien = getSinhVienTheoId($masinhvien, $conn);
+        $sinhvien = getInfoSV($masinhvien, $conn);
         $id_lophoc = $_GET['id'];
         $lophoc = getLopTheoId($id_lophoc, $conn);
         $khoahoc = 0;
@@ -25,19 +25,16 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                 $usrname = "Sinh viên " . $tensinhvien;
 
                 if ($lophoc != 0) {
-                    $khoahoc = getTenCuaKhoa($lophoc['makhoahoc'], $conn);
-                    $tenkhoahoc = $khoahoc['tenkhoahoc'];
+                    $khoahoc = $lophoc['tenkhoahoc'];
 
                     $baigiang = getBaiGiangCuaLop($id_lophoc, $conn);
-                    $id_gv = getGiangVienCuaLop($id_lophoc, $conn);
-                    $giangvien = getGiangVienTheoId($id_gv['magiangvien'], $conn);
-                    if ($giangvien['gioitinh'] = true) {
+                    if ($lophoc['gtgv'] = true) {
                         $gGV = "Thầy ";
                     } else {
                         $gGV = "Cô ";
                     }
-                    $tengiangvien = $gGV . $giangvien['ho_tenlot'] . " " . $giangvien['ten'];
-                    $title = $tenkhoahoc . " - " . $lophoc['malophoc'];
+                    $tengiangvien = $gGV . $lophoc['ho_gv'] . " " . $lophoc['ten_gv'];
+                    $title = $lophoc['tenkhoahoc'] . " - " . $lophoc['malophoc'];
 
                     $real_title = $title . " - " . $tengiangvien;
                 } else {
