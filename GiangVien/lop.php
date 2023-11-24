@@ -58,11 +58,9 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach'])) {
                             <tbody>
                                 <?php $i = 1;
                                 foreach ($lophoc as $lop) {
-                                    $tenkhoa = getTenCuaKhoa($lop['makhoahoc'], $conn);
-                                    $tenkhoa = $tenkhoa['tenkhoahoc'];
-                                    $tenlop = $tenkhoa . " (" . $lop['makhoahoc'] . ")";
+                                    $tenlop = $lop['tenkhoahoc'] . " (" . $lop['makhoahoc'] . ")";
                                     $id_lop = $lop['id_c'];
-                                    $soluong = getSoLuongSinhVienCuaLop($id_lop, $conn);
+                                    $soluong = $lop['count_sv'];
                                 ?>
                                     <tr>
                                         <th scope="row">

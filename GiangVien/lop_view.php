@@ -29,8 +29,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                 $usrname = "Giảng viên " . $tengiangvien;
 
                 if ($lophoc != 0) {
-                    $khoahoc = getTenCuaKhoa($lophoc['makhoahoc'], $conn);
-                    $tenkhoahoc = $khoahoc['tenkhoahoc'];
+                    $khoahoc = $lophoc['tenkhoahoc'];
 
                     $baigiang = getBaiGiangCuaLop($id_lophoc, $conn);
                     $id_gv = getGiangVienCuaLop($id_lophoc, $conn);
@@ -40,7 +39,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                     } else {
                         $gGV = "Cô ";
                     }
-                    $title = $tenkhoahoc . " - " . $lophoc['malophoc'];
+                    $title = $lophoc['tenkhoahoc'] . " - " . $lophoc['malophoc'];
 
                     $real_title = $title;
                 } else {

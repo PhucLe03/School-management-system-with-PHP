@@ -17,7 +17,7 @@ function getGiangVienTheoId($giangvien_id, $conn)
 
 function getLopCuaGiangVien($giangvien_id, $conn)
 {
-  $sql = "SELECT id_c,malophoc,makhoahoc FROM lophoc
+  $sql = "SELECT * FROM all_lophoc
           WHERE magiangvien=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$giangvien_id]);
@@ -37,4 +37,18 @@ function suaBaiGiang($id_baigiang) {
 }
 function xoaBaiGiang($id_baigiang) {
   return true;
+}
+
+function getInfoGV($id, $conn) {
+  $sql = "SELECT * FROM in4giangvien
+           WHERE magiangvien=?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$id]);
+
+  if ($stmt->rowCount() == 1) {
+    $giangvien = $stmt->fetch();
+    return $giangvien;
+  } else {
+    return 0;
+  }
 }

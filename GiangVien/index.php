@@ -9,7 +9,7 @@ if (
 
     $magiangvien = $_SESSION['magiangvien'];
 
-    $giangvien = getGiangVienTheoId($magiangvien, $conn);
+    $giangvien = getInfoGV($magiangvien, $conn);
     $gioitinh = "Nam";
     if ($giangvien['gioitinh'] == 0) {
       $gioitinh = "Nữ";
