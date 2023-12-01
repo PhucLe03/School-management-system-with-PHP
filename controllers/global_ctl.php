@@ -11,3 +11,7 @@ function gotoBaiGiang($baigiang_id) {
 function gotoBaiTap($baitap_id) {
   return "./baitap.php?id=$baitap_id";
 }
+
+function gotoBaiKT($kt_id) {
+  return "./kiemtra.php?id=$kt_id";
+}

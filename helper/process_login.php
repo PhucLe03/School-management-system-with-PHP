@@ -34,10 +34,12 @@ if (
         exit;
     } else if ($miss_uname == true) {
         $em  = "u";
+        $_SESSION['pw'] = $pass;
         header("Location: ../login.php?error=$em");
         exit;
     } else if ($miss_pass == true) {
         $em  = "p";
+        $_SESSION['un'] = $uname;
         header("Location: ../login.php?error=$em");
         exit;
     } else {

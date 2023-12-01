@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,17 +52,27 @@
                     </div>
                 <?php } ?>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="uname" placeholder="">
-                    <label class="form-label">Tên đăng nhập</label>
+                    <input type="text" class="form-control" name="uname" placeholder=""
+                    value="<?php
+                        if (isset($_SESSION['un'])) {
+                            echo $_SESSION['un'];
+                        }
+                    ?>">
+                    <label class="form-label">Tên đăng nhập <span style="color: red;">*</span></label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" name="pass" placeholder="">
-                    <label class="form-label">Mật khẩu</label>
+                    <input type="password" class="form-control" name="pass" placeholder=""
+                    value="<?php
+                        if (isset($_SESSION['pw'])) {
+                            echo $_SESSION['pw'];
+                        }
+                    ?>">
+                    <label class="form-label">Mật khẩu <span style="color: red;">*</span></label>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Đăng nhập với tư cách</label>
+                    <label class="form-label">Đăng nhập với tư cách <span style="color: red;">*</span></label>
                     <select class="form-control" name="role">
                         <option value="SV">Sinh Viên</option>
                         <option value="GV">Giảng Viên</option>
@@ -70,7 +86,9 @@
             </form>
 
             <br /><br />
-            <?php include "footer.php"; ?>
+            <?php
+            unset($_SESSION['un']); unset($_SESSION['pw']);
+            include "footer.php"; ?>
 
         </div>
     </div>

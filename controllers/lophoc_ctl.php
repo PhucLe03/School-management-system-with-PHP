@@ -1,21 +1,5 @@
 <?php
 
-function getSinhVienCuaLop($lop_id, $conn)
-{
-  $sql = "SELECT masinhvien FROM lop_rec
-          WHERE id_lophoc=:idlop";
-  $stmt = $conn->prepare($sql);
-  $stmt->bindParam(':idlop', $lop_id);
-
-  $stmt->execute();
-  if ($stmt->rowCount() >= 1) {
-    $sinhvien = $stmt->fetchAll();
-    return $sinhvien;
-  } else {
-    return 0;
-  }
-}
-
 function getSoLuongSinhVienCuaLop($lop_id, $conn)
 {
   $sql = "SELECT masinhvien FROM lop_rec
@@ -183,6 +167,37 @@ function getBaiTapTheoId($baitap_id, $conn)
   }
 }
 
+function getBaiKTCuaLop($lop_id, $conn)
+{
+  $sql = "SELECT id_t,tieude FROM kiemtra
+          WHERE id_lophoc=?";
+  $stmt = $conn->prepare($sql);
+
+  $stmt->execute([$lop_id]);
+  if ($stmt->rowCount() >= 1) {
+    $baigiang = $stmt->fetchAll();
+    return $baigiang;
+  } else {
+    return 0;
+  }
+}
+
+function getBaiKTTheoId($baitap_id, $conn)
+{
+  $sql = "SELECT * FROM kiemtra
+          WHERE id_t=:id";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':id', $baitap_id);
+
+  $stmt->execute();
+  if ($stmt->rowCount() == 1) {
+    $baigiang = $stmt->fetch();
+    return $baigiang;
+  } else {
+    return 0;
+  }
+}
+
 function getAllLop($conn)
 {
   $sql = "SELECT * FROM all_lophoc";
@@ -208,6 +223,25 @@ function getLopCuaSinhVien($sinhvien_id, $conn)
     $lophoc = $stmt->fetchAll();
     return $lophoc;
   } else {
+    return 0;
+  }
+}
+
+function getSinhVienCuaLop($id_lophoc, $conn) {
+  $sql = "SELECT s.masinhvien, s.ho_tenlot, s.ten, r.id_lophoc, l.malophoc, l.makhoahoc 
+          FROM `in4sinhvien` s
+          JOIN lop_rec r ON r.masinhvien = s.masinhvien
+          JOIN lophoc l ON r.id_lophoc = l.id_c
+          WHERE l.id_c = :id;";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':id', $id_lophoc);
+
+  $stmt->execute();
+  if ($stmt->rowCount() >= 1) {
+    $sv = $stmt->fetchAll();
+    return $sv;
+  }
+  else {
     return 0;
   }
 }

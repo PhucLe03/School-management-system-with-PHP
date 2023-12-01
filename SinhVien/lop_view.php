@@ -28,7 +28,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                     $khoahoc = $lophoc['tenkhoahoc'];
 
                     $baigiang = getBaiGiangCuaLop($id_lophoc, $conn);
-                    if ($lophoc['gtgv'] = true) {
+                    if ($lophoc['gtgv'] == true) {
                         $gGV = "Thầy ";
                     } else {
                         $gGV = "Cô ";
@@ -77,7 +77,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                     foreach ($baigiang as $bg) {
                                     ?>
                                         <tr>
-                                            <th scope="row">
+                                            <th scope="row"  class="col-2">
                                                 <?php echo $i;
                                                 $i++; ?>
                                             </th>
@@ -111,7 +111,7 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                     foreach ($baitap as $bt) {
                                     ?>
                                         <tr>
-                                            <th scope="row">
+                                            <th scope="row"  class="col-2">
                                                 <?php echo $i;
                                                 $i++; ?>
                                             </th>
@@ -127,8 +127,43 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                     ?>
                                 </tbody>
                             </table>
-                            <?php } ?>
-                        <?php } else { ?>
+                            <?php }
+                            $kiemtra = getBaiKTCuaLop($id_lophoc,$conn); // getBaiTap
+                            if ($kiemtra != 0) {
+                            ?>
+                            
+                            <!-- Kiem tra  -->
+                            <table class="table table-sm table-bordered mt-3 n-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Kiểm tra</th>
+                                        <th scope="col">Tiêu đề</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $i = 1;
+                                    foreach ($kiemtra as $kt) {
+                                    ?>
+                                        <tr>
+                                            <th scope="row"  class="col-2">
+                                                <?php echo $i;
+                                                $i++; ?>
+                                            </th>
+                                            <td scope="row">
+                                                <a href="<?php echo gotoBaiKT($kt['id_t']) ?>">
+                                                    <?= $kt['tieude'] ?>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+
+                        <?php } } else { ?>
                             <div class="alert alert-info" role="alert">
                                 Chưa có bài giảng.
                             </div>
