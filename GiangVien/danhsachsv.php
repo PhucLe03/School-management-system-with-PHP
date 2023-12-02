@@ -10,7 +10,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
         $giangvien = getGiangVienTheoId($magiangvien, $conn);
 
         $truycap = gvKiemTraQuyenVaoLop($magiangvien, $id_lophoc, $conn);
-        $danhsach = getSinhVienCuaLop($id_lophoc, $conn);
+        $danhsach = getAllSinhVienCuaLop($id_lophoc, $conn);
         if ($danhsach != 0) {
             $lophoc = getLopTheoId($id_lophoc, $conn);
             $khoahoc = 0;
@@ -58,6 +58,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
         </head>
 
         <body>
+            
             <?php
             include "comp/navbar.php";
             ?>
@@ -78,19 +79,22 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                             / <a style="color:darkslategrey;">
                                 Danh sách sinh viên
                             </a>
-                            <table class="table table-sm table-bordered mt-3 n-table table-hover">
+                            <div class="row">
+                                <div class="col-9">
+                                    <table class="table table-sm table-bordered mt-3 n-table table-hover">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Mã sinh viên</th>
                                                 <th scope="col">Họ và tên</th>
-                                                <th scope="col">Điểm</th>
+                                                <th scope="col" colspan="2">Điểm</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $i = 1;
                                             foreach ($danhsach as $sv) {
+                                                $tensv = $sv['ho_tenlot'] . " " . $sv['ten'];
                                             ?>
                                                 <tr>
                                                     <th scope="row" class="col-2">
@@ -101,13 +105,28 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                                         <?= $sv['masinhvien'] ?>
                                                     </td>
                                                     <td scope="row">
-                                                        <?= $sv['ho_tenlot']." ".$sv['ten'] ?>
-                                                        <!-- <a href="<?php echo gotoBaiTap($bt['id_e']) ?>">
-                                                        </a> -->
+                                                        <?= $tensv ?>
                                                     </td>
-                                                    <td scope="row">
-                                                        Chưa có điểm
-                                                    </td>
+                                                    <?php
+                                                        $tensv = $sv['ho_tenlot'] . " " . $sv['ten'];
+                                                        $mssv = $sv['masinhvien'];
+                                                        if (is_null($sv['sodiem'])) {
+                                                            ?>
+                                                        <td scope="row"> Chưa chấm điểm </td>
+                                                        <td scope="row"> <a href="<?php echo "./nhapdiem.php?lopid=$id_lophoc&mssv=$mssv"; ?>" class="btn btn-primary">Nhập</a> </td>
+                                                        <?php
+                                                            // echo "Chưa chấm điểm";
+                                                        } else {
+                                                            
+                                                            ?>
+                                                        
+                                                        <td scope="row"> <?= $sv['sodiem'] ?> </td>
+                                                        <td scope="row"> <a href="<?php echo "./nhapdiem.php?lopid=$id_lophoc&mssv=$mssv"; ?>" class="btn btn-primary">Sửa</a> </td>
+                                                        <?php
+                                                            // echo $sv['sodiem'];
+                                                        }
+                                                        ?>
+                                                        <!-- <button class="btn btn-primary">Nhập</button> -->
 
                                                 </tr>
                                             <?php
@@ -116,14 +135,53 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                         </tbody>
                                     </table>
 
-                        <?php } else { ?>
+                                </div>
+                                <div class="col-3">
+                                    <form id="score-form" class="score-form-hide">
+                                        <?php
+                                        if (isset($_SESSION['diem'])) {
+                                            echo "Chỉnh sửa ";
+                                        } else {
+                                            echo "Nhập ";
+                                        }
+                                        ?>điểm cho sinh viên<br/>
+                                        <?php
+                                        if (isset($_SESSION['svduocchon'])) {
+                                            echo $_SESSION['svduocchon'];
+                                        }
+                                        else {
+                                            echo "Error!!!";
+                                        }
+                                        ?>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" max="10" min="0" class="form-control" name="score" placeholder="" 
+                                            value="<?php
+                                                if (isset($_SESSION['diem'])) {
+                                                    echo $_SESSION['diem'];
+                                                }
+                                                ?>">
+                                            <label class="form-label">Điểm <span style="color: red;">*</span></label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Nhập</button>
+                                        <a onclick="hideForm()" class="text-decoration-none" style="color: red; cursor: pointer;">Hủy</a>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <!-- <button onclick="showForm()">Show</button> -->
+                            <!-- <button onclick="hideForm()">Hide</button> -->
+
+                        <?php
+                        unset($_SESSION['svduocchon']); unset($_SESSION['diem']);
+                    
+                    } else { ?>
                             <div class="alert alert-info" role="alert">
                                 Chưa có sinh viên.
                             </div>
                         <?php } ?>
                     <?php } else { ?>
                         <div class="alert alert-info" role="alert">
-                        Lớp học này đang được giảng viên khác quản lý.
+                            Lớp học này đang được giảng viên khác quản lý.
                         </div>
                     <?php } ?>
                 <?php } else { ?>

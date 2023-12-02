@@ -227,18 +227,49 @@ function getLopCuaSinhVien($sinhvien_id, $conn)
   }
 }
 
-function getSinhVienCuaLop($id_lophoc, $conn) {
-  $sql = "SELECT s.masinhvien, s.ho_tenlot, s.ten, r.id_lophoc, l.malophoc, l.makhoahoc 
-          FROM `in4sinhvien` s
-          JOIN lop_rec r ON r.masinhvien = s.masinhvien
-          JOIN lophoc l ON r.id_lophoc = l.id_c
-          WHERE l.id_c = :id;";
-  $stmt = $conn->prepare($sql);
-  $stmt->bindParam(':id', $id_lophoc);
+// function getSinhVienCuaLop($id_lophoc, $conn) {
+//   $sql = "SELECT s.masinhvien, s.ho_tenlot, s.ten, r.id_lophoc, l.malophoc, l.makhoahoc 
+//           FROM `in4sinhvien` s
+//           JOIN lop_rec r ON r.masinhvien = s.masinhvien
+//           JOIN lophoc l ON r.id_lophoc = l.id_c
+//           WHERE l.id_c = :id;";
+//   $stmt = $conn->prepare($sql);
+//   $stmt->bindParam(':id', $id_lophoc);
 
-  $stmt->execute();
+//   $stmt->execute();
+//   if ($stmt->rowCount() >= 1) {
+//     $sv = $stmt->fetchAll();
+//     return $sv;
+//   }
+//   else {
+//     return 0;
+//   }
+// }
+
+function getAllSinhVienCuaLop($id_lophoc, $conn) {
+  $sql = "SELECT * from xemdiem
+          WHERE id_lophoc=?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$id_lophoc]);
   if ($stmt->rowCount() >= 1) {
     $sv = $stmt->fetchAll();
+    return $sv;
+  }
+  else {
+    return 0;
+  }
+}
+
+function getSinhVienCuaLop($id_lophoc, $id_sv, $conn) {
+  $sql = "SELECT * from xemdiem
+          WHERE id_lophoc=:id AND masinhvien=:sv";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':id', $id_lophoc);
+  $stmt->bindParam(':sv', $id_sv);
+
+  $stmt->execute();
+  if ($stmt->rowCount() == 1) {
+    $sv = $stmt->fetch();
     return $sv;
   }
   else {

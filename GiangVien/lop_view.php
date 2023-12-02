@@ -72,7 +72,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                             <button class="btn btn-primary">Thêm bài giảng</button>
                         </a>
                         <button class="btn btn-primary">Thêm bài tập</button>
-                        <button class="btn btn-primary">Tạo/Sửa bài kiểm tra</button>
+                        <button class="btn btn-primary">Thêm bài kiểm tra</button>
                         <a href="<?php echo "./danhsachsv.php?lopid=$id_lophoc"; ?>">
                             <button class="btn btn-primary">Xem danh sách sinh viên</button>
                         </a>
@@ -125,7 +125,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                         <thead>
                                             <tr>
                                                 <th scope="col">Bài tập</th>
-                                                <th scope="col">Tiêu đề</th>
+                                                <th scope="col" colspan="3">Tiêu đề</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -160,7 +160,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                         <thead>
                                             <tr>
                                                 <th scope="col">Kiểm tra</th>
-                                                <th scope="col">Tiêu đề</th>
+                                                <th scope="col" colspan="3">Tiêu đề</th>
                                             </tr>
                                         </thead>
                                         <tbody>

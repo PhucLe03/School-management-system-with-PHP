@@ -10,7 +10,10 @@ if (
     $id = $_SESSION['id_lophoc'];
     $tieude = $_POST['title'];
     $noidung = $_POST['content'];
-
+    
+    $_SESSION['tieude'] = $tieude;
+    $_SESSION['noidung'] = $noidung;
+    
     $miss_tieude = false;
     $miss_noidung = false;
 
@@ -27,12 +30,10 @@ if (
         exit;
     } else if ($miss_tieude == true) {
         $em  = "t"; $_SESSION['error'] = $em;
-        $_SESSION['noidung'] = $noidung;
         header("Location: ../thembaigiang.php?lopid=$id");
         exit;
     } else if ($miss_noidung == true) {
         $em  = "c"; $_SESSION['error'] = $em;
-        $_SESSION['tieude'] = $tieude;
         header("Location: ../thembaigiang.php?lopid=$id");
         exit;
     } else {

@@ -83,3 +83,11 @@ textarea {
 	max-width: 600px;
 	width: 100%;
 }
+
+.score-form-active {
+	visibility: visible;
+}
+
+.score-form-hide {
+	visibility: hidden;
+}

@@ -12,10 +12,13 @@ if (
     $pass = $_POST['pass'];
     $role = $_POST['role'];
 
+    $_SESSION['un'] = $uname;
+    $_SESSION['pw'] = $pass;
+    
     $miss_uname = false;
     $miss_pass = false;
     $miss_role = false;
-
+    
     if (empty($role)) {
         $em  = "o";
         header("Location: ../login.php?error=$em");
@@ -34,12 +37,10 @@ if (
         exit;
     } else if ($miss_uname == true) {
         $em  = "u";
-        $_SESSION['pw'] = $pass;
         header("Location: ../login.php?error=$em");
         exit;
     } else if ($miss_pass == true) {
         $em  = "p";
-        $_SESSION['un'] = $uname;
         header("Location: ../login.php?error=$em");
         exit;
     } else {
