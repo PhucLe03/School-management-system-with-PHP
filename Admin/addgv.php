@@ -146,7 +146,7 @@ if (isset($_SESSION['maadmin']) && isset($_SESSION['tucach'])) {
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="mk" placeholder="" value="<?php
+                                <input type="password" class="form-control" name="mk" placeholder="" value="<?php
                                                                                                         if (isset($_SESSION['mk'])) {
                                                                                                             echo $_SESSION['mk'];
                                                                                                         }
@@ -155,7 +155,7 @@ if (isset($_SESSION['maadmin']) && isset($_SESSION['tucach'])) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="mk1" placeholder="" value="<?php
+                                <input type="password" class="form-control" name="mk1" placeholder="" value="<?php
                                                                                                             if (isset($_SESSION['mk1'])) {
                                                                                                                 echo $_SESSION['mk1'];
                                                                                                             }
