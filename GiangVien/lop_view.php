@@ -68,10 +68,12 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                     if ($truycap != false) {
                     ?>
                         <a class="btn btn-primary" href="<?php echo themBaiGiang($id_lophoc); ?>">Thêm bài giảng</a>
-                        <button class="btn btn-primary">Thêm bài tập</button>
-                        <button class="btn btn-primary">Thêm bài kiểm tra</button>
-                        <a href="<?php echo "./danhsachsv.php?lopid=$id_lophoc"; ?>">
-                            <button class="btn btn-primary">Xem danh sách sinh viên</button>
+                        <a class="btn btn-primary" href="<?php echo themBaiTap($id_lophoc); ?>">Thêm bài tập</a>
+                        <a class="btn btn-primary" href="<?php echo themBaiKT($id_lophoc); ?>">Thêm bài kiểm tra</a>
+                        <!-- <button class="btn btn-primary">Thêm bài tập</button>
+                        <button class="btn btn-primary">Thêm bài kiểm tra</button> -->
+                        <a class="btn btn-primary" href="<?php echo "./danhsachsv.php?lopid=$id_lophoc"; ?>">
+                            Xem danh sách sinh viên
                         </a>
 
                         <?php
