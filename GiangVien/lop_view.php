@@ -67,10 +67,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                     <?php
                     if ($truycap != false) {
                     ?>
-                        <a href="<?php echo "./thembaigiang.php?lopid=$id_lophoc"; ?>">
-
-                            <button class="btn btn-primary">Thêm bài giảng</button>
-                        </a>
+                        <a class="btn btn-primary" href="<?php echo themBaiGiang($id_lophoc); ?>">Thêm bài giảng</a>
                         <button class="btn btn-primary">Thêm bài tập</button>
                         <button class="btn btn-primary">Thêm bài kiểm tra</button>
                         <a href="<?php echo "./danhsachsv.php?lopid=$id_lophoc"; ?>">
@@ -92,6 +89,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                         <?php
                                         $i = 1;
                                         foreach ($baigiang as $bg) {
+                                            $idbg = $bg['id_l'];
                                         ?>
                                             <tr>
                                                 <th scope="row" class="col-2">
@@ -104,7 +102,8 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                                     </a>
                                                 </td>
                                                 <td scope="row" class="col-1">
-                                                    <button class="btn btn-primary" style="background-color: dodgerblue;">Sửa</button>
+                                                    <a href="<?php echo suaBaiGiang($idbg, $id_lophoc); ?>" class="btn btn-primary">Sửa</a>
+                                                    <!-- <button class="btn btn-primary" style="background-color: dodgerblue;">Sửa</button> -->
                                                 </td>
                                                 <td scope="row" class="col-1">
                                                     <button class="btn btn-primary" style="background-color: red;">Xóa</button>

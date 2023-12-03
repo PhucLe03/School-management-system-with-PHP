@@ -29,16 +29,6 @@ function getLopCuaGiangVien($giangvien_id, $conn)
   }
 }
 
-function themBaiGiang($id_baigiang) {
-  return "./worker/thembaigiang.php?id=$id_baigiang";
-}
-function suaBaiGiang($id_baigiang) {
-  return "./worker/suabaigiang.php?id=$id_baigiang";
-}
-function xoaBaiGiang($id_baigiang) {
-  return true;
-}
-
 function getInfoGV($id, $conn) {
   $sql = "SELECT * FROM in4giangvien
            WHERE magiangvien=?";

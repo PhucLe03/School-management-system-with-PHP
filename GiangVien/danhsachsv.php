@@ -113,7 +113,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                                         if (is_null($sv['sodiem'])) {
                                                             ?>
                                                         <td scope="row"> Chưa chấm điểm </td>
-                                                        <td scope="row"> <a href="<?php echo "./nhapdiem.php?lopid=$id_lophoc&mssv=$mssv"; ?>" class="btn btn-primary">Nhập</a> </td>
+                                                        <td scope="row"> <a href="<?php echo gotoNhapDiem($id_lophoc,$mssv); ?>" class="btn btn-primary">Nhập</a> </td>
                                                         <?php
                                                             // echo "Chưa chấm điểm";
                                                         } else {
@@ -121,7 +121,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                                             ?>
                                                         
                                                         <td scope="row"> <?= $sv['sodiem'] ?> </td>
-                                                        <td scope="row"> <a href="<?php echo "./nhapdiem.php?lopid=$id_lophoc&mssv=$mssv"; ?>" class="btn btn-primary">Sửa</a> </td>
+                                                        <td scope="row"> <a href="<?php echo gotoNhapDiem($id_lophoc,$mssv); ?>" class="btn btn-primary">Sửa</a> </td>
                                                         <?php
                                                             // echo $sv['sodiem'];
                                                         }
