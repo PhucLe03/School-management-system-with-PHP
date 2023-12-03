@@ -84,6 +84,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                         <div class="alert alert-danger" role="alert">
                                             <?php
                                             $err_stmt = $_SESSION['error'];
+                                            unset($_SESSION['error']);
                                             if ($err_stmt == "tnc") {
                                                 $err = "Tiêu đề và nội dung không được để trống";
                                             } else if ($err_stmt == "t") {

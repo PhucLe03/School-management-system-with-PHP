@@ -81,9 +81,9 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                     if (isset($_SESSION['error'])) { ?>
                                         <div class="alert alert-danger" role="alert">
                                             <?php
-                                            $err_stmt = $_SESSION['error'];
+                                            // $err_stmt = $_SESSION['error'];
                                             unset($_SESSION['error']);
-                                            echo $err_stmt;
+                                            echo "Đã có lỗi xảy ra";
                                             ?>
                                         </div>
                                     <?php } ?>

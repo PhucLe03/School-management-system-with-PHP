@@ -38,7 +38,7 @@ if (
         exit;
     } else {
         // Thêm bài giảng
-        
+        unset($_SESSION['tieude']); unset($_SESSION['noidung']);
         $sql = "INSERT INTO baigiang (id_lophoc,tieude,noidung)
                 VALUE (:id,:tt,:ct);";
         $stmt = $conn->prepare($sql);
