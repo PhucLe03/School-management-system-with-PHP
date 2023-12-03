@@ -9,9 +9,10 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
 
         $giangvien = getGiangVienTheoId($magiangvien, $conn);
         $id_lophoc = $_GET['lopid'];
-        $_SESSION['id_lophoc'] = $id_lophoc;
         $lophoc = getLopTheoId($id_lophoc, $conn);
-        $sv = getSinhVienCuaLop($id_lophoc, $_GET['mssv'],$conn);
+        $id_baitap = $_GET['id'];
+        $_SESSION['id_lophoc'] = $id_lophoc;
+        $_SESSION['id_bt'] = $id_baitap;
         $khoahoc = 0;
         $truycap = gvKiemTraQuyenVaoLop($magiangvien, $id_lophoc, $conn);
         // echo $lophoc['malophoc'];
@@ -33,7 +34,8 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                 if ($lophoc != 0) {
                     $khoahoc = $lophoc['tenkhoahoc'];
 
-                    $baigiang = getBaiGiangCuaLop($id_lophoc, $conn);
+                    $baitap = getNoiDungBaiTap($id_baitap, $conn);
+                    $tieude = $baitap['tieude']; $noidung = $baitap['noidung'];
                     $id_gv = getGiangVienCuaLop($id_lophoc, $conn);
                     $giangvien = getGiangVienTheoId($id_gv['magiangvien'], $conn);
                     if ($giangvien['gioitinh'] = true) {
@@ -70,28 +72,25 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                     if ($truycap != false) {
                     ?>
                         <div class=""><br /> <br />
-                            <a href="./danhsachsv.php?lopid=<?= $id_lophoc ?>" class="text-decoration-none">
+                            <a href="./lop_view.php?id=<?=$id_lophoc?>" class="text-decoration-none">
                                 Quay lại
                             </a>
                             <div class="d-flex justify-content-center align-items-center flex-column">
-                                <form class="login" method="post" action="comp/nhapdiem.php">
-                                    <h3><?php 
-                                                if (!is_null($sv['sodiem'])) {
-                                                    echo 'CHỈNH SỬA';
-                                                } else {
-                                                    echo 'NHẬP';
-                                                }
-                                                ?> ĐIỂM</h3>
+                                <form class="login" method="post" action="comp/suabaitap.php">
+                                    <h3>CHỈNH SỬA BÀI TẬP</h3>
                                     <?php
                                     // $err_stmt = $_GET['error'];
                                     if (isset($_SESSION['error'])) { ?>
                                         <div class="alert alert-danger" role="alert">
                                             <?php
                                             $err_stmt = $_SESSION['error'];
-                                            if ($err_stmt == "e") {
-                                                $err = "Điểm không được để trống";
-                                            } else if ($err_stmt == "r") {
-                                                $err = "Điểm phải nằm trong đoạn 0 và 10";
+                                            unset($_SESSION['error']);
+                                            if ($err_stmt == "tnc") {
+                                                $err = "Tiêu đề và nội dung không được để trống";
+                                            } else if ($err_stmt == "t") {
+                                                $err = "Tiêu đề không được trống";
+                                            } else if ($err_stmt == "c") {
+                                                $err = "Nội dung không được để trống";
                                             } else {
                                                 $err = "Đã có lỗi xảy ra";
                                             }
@@ -100,52 +99,32 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                             <?= $err ?>
                                         </div>
                                     <?php } ?>
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" name="sv" placeholder="" 
-                                                value="<?php
-                                                    if (isset($_GET['mssv'])) {
-                                                        echo $sv['ho_tenlot'] . " " . $sv['ten'];
-
-                                                    } else echo "ERROR!!!";
-                                                    ?>" disabled>
-                                                <label class="form-label">Họ và tên</label>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control" name="score" placeholder=""
-                                                value="<?php 
-                                                if (!is_null($sv['sodiem'])) {
-                                                    echo $sv['sodiem'];
-                                                } else {
-                                                    echo NULL;
-                                                }
-                                                ?>">
-                                                <label class="form-label">Điểm: <span style="color: red;">*</span></label>
-                                            </div>
-                                        </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="title" 
+                                        placeholder="" value="<?= $tieude ?>">
+                                        <label class="form-label">Tiêu đề <span style="color: red;">*</span></label>
                                     </div>
-                                    
+
                                     <!-- <div class="form-floating mb-3">
                                         <input type="password" class="form-control" name="pass" placeholder="">
                                     </div> -->
-                                    <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-primary">Nhập</button>
+                                    <div class=" mb-3">
+                                        <label class="form-label">Nội dung: <span style="color: red;">*</span></label>
+                                        <textarea class="form-control" name="content" rows="4" 
+                                        placeholder=""><?= $noidung ?></textarea>
                                     </div>
-                                    <input type="text" class="form-control" style="visibility: hidden;" name="class" placeholder="" 
-                                        value="<?php echo $id_lophoc;?>" readonly>
-                                        <input type="text" class="form-control" style="visibility: hidden;" name="mssv" placeholder="" 
-                                        value="<?php echo $_GET['mssv'];?>" readonly>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                    </div>
                                 </form>
 
                                 <br /><br />
 
                             </div>
                         </div>
-                    <?php } else { ?>
+                    <?php
+                        unset($_SESSION['tieude']); unset($_SESSION['noidung']);
+                        } else { ?>
                         <div class="alert alert-info" role="alert">
                             <!-- <?= $gGV ?> không dạy lớp học này. -->
                             Lớp học này đang được giảng viên khác quản lý.
@@ -167,7 +146,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
             </script>
         </body>
         <?php
-        unset($_SESSION['error']);
+        unset($_SESSION['tieude']); unset($_SESSION['noidung']);
         ?>
 
         </html>

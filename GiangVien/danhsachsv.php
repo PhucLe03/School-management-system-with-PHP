@@ -11,13 +11,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
 
         $truycap = gvKiemTraQuyenVaoLop($magiangvien, $id_lophoc, $conn);
         $danhsach = getAllSinhVienCuaLop($id_lophoc, $conn);
-        if ($danhsach != 0) {
-            $lophoc = getLopTheoId($id_lophoc, $conn);
-            $khoahoc = 0;
-        } else {
-            $lophoc = 0;
-            $khoahoc = 0;
-        }
+        $lophoc = getLopTheoId($id_lophoc, $conn);
 ?>
 
         <!DOCTYPE html>
@@ -43,7 +37,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                 if ($truycap != true) {
                     $title = "Không thể truy cập vào lớp";
                 } else if ($danhsach == 0) {
-                    $title = "Không tìm thấy bài giảng";
+                    $title = "Chưa có sinh viên";
                 } else {
                     $title .= " - Danh sách sinh viên";
                 }
@@ -63,7 +57,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
             include "comp/navbar.php";
             ?>
             <?php
-            if ($khoahoc != 0) {
+            if ($lophoc != 0) {
             ?>
                 <div class="container mt-5">
                     <?php

@@ -6,12 +6,12 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
         include "../controllers/includer.php";
 
         $magiangvien = $_SESSION['magiangvien'];
-        $id_baigiang = $_GET['id'];
+        $id_baitap = $_GET['id'];
         $giangvien = getGiangVienTheoId($magiangvien, $conn);
 
-        $baigiang = getNoiDungBaiGiang($id_baigiang, $conn);
-        if ($baigiang != 0) {
-            $id_lophoc = $baigiang['id_lophoc'];
+        $baitap = getNoiDungBaiTap($id_baitap, $conn);
+        if ($baitap != 0) {
+            $id_lophoc = $baitap['id_lophoc'];
             $lophoc = getLopTheoId($id_lophoc, $conn);
             $khoahoc = 0;
             $truycap = gvKiemTraQuyenVaoLop($magiangvien, $id_lophoc, $conn);
@@ -43,10 +43,10 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                 }
                 if ($truycap != true) {
                     $title = "Không thể truy cập vào lớp";
-                } else if ($baigiang == 0) {
-                    $title = "Không tìm thấy bài giảng";
+                } else if ($baitap == 0) {
+                    $title = "Không tìm thấy bài tập";
                 } else {
-                    $title .= " - " . $baigiang['tieude'];
+                    $title .= " - " . $baitap['tieude'];
                 }
                 include "../header.php";
                 ?>
@@ -70,33 +70,33 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                     if ($truycap != false) {
                     ?>
                         <?php
-                        if ($baigiang != 0) {
+                        if ($baitap != 0) {
                         ?>
-                            <h1><?= $baigiang['tieude'] ?></h1>
+                            <h1><?= $baitap['tieude'] ?></h1>
                             <a href="<?php echo gotoLop($id_lophoc) ?>">
                                 <?= $real_title ?>
                             </a>
                             / <a style="color:darkslategrey;">
-                                <?= $baigiang['tieude'] ?>
+                                <?= $baitap['tieude'] ?>
                             </a>
-                            <!-- Bai Giang  -->
+                            <!-- Bài Tập  -->
                             <br />
                             <br />
                             <br />
                             <hr />
                             <p>
-                                <?= $baigiang['noidung'] ?>
+                                <?= $baitap['noidung'] ?>
                             </p>
                             <br />
                             <hr />
 
-                            <a href="<?php echo suaBaiGiang($id_baigiang, $id_lophoc); ?>" class="btn btn-primary">Sửa</a>
-                            <a href="<?php echo xoaBaiGiang($id_baigiang, $id_lophoc); ?>" class="btn btn-primary" style="background-color: red;">Xóa</a>
+                            <a href="<?php echo suabaitap($id_baitap, $id_lophoc); ?>" class="btn btn-primary">Sửa</a>
+                            <a href="<?php echo xoabaitap($id_baitap, $id_lophoc); ?>" class="btn btn-primary" style="background-color: red;">Xóa</a>
                             <!-- <button class="btn btn-primary">Xóa</button> -->
 
                         <?php } else { ?>
                             <div class="alert alert-info" role="alert">
-                                Không tìm thấy bài giảng.
+                                Không tìm thấy bài tập.
                             </div>
                         <?php } ?>
                     <?php } else { ?>

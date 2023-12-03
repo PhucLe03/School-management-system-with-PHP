@@ -134,6 +134,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                             <?php
                                             $i = 1;
                                             foreach ($baitap as $bt) {
+                                                $idbt = $bt['id_e'];
                                             ?>
                                                 <tr>
                                                     <th scope="row" class="col-2">
@@ -144,6 +145,12 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                                         <a href="<?php echo gotoBaiTap($bt['id_e']) ?>">
                                                             <?= $bt['tieude'] ?>
                                                         </a>
+                                                    </td>
+                                                    <td scope="row" class="col-1">
+                                                        <a href="<?php echo suaBaiTap($idbt, $id_lophoc); ?>" class="btn btn-primary">Sửa</a>
+                                                    </td>
+                                                    <td scope="row" class="col-1">
+                                                        <a href="<?php echo xoaBaiTap($idbt, $id_lophoc); ?>" class="btn btn-primary" style="background-color: red;">Xóa</a>
                                                     </td>
 
                                                 </tr>
@@ -169,6 +176,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                             <?php
                                             $i = 1;
                                             foreach ($kiemtra as $kt) {
+                                                $idkt = $kt['id_t'];
                                             ?>
                                                 <tr>
                                                     <th scope="row" class="col-2">
@@ -180,7 +188,12 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                                             <?= $kt['tieude'] ?>
                                                         </a>
                                                     </td>
-
+                                                    <td scope="row" class="col-1">
+                                                        <a href="<?php echo suaBaiKT($idkt, $id_lophoc); ?>" class="btn btn-primary">Sửa</a>
+                                                    </td>
+                                                    <td scope="row" class="col-1">
+                                                        <a href="<?php echo xoaBaiKT($idkt, $id_lophoc); ?>" class="btn btn-primary" style="background-color: red;">Xóa</a>
+                                                    </td>
                                                 </tr>
                                             <?php
                                             }

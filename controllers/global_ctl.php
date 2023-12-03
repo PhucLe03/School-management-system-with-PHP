@@ -28,6 +28,30 @@ function gotoBaiTap($baitap_id) {
   return "./baitap.php?id=$baitap_id";
 }
 
+function themBaiTap($id_lophoc) {
+  return "./thembaitap.php?lopid=$id_lophoc";
+}
+
+function suaBaiTap($id,$lop_id) {
+  return "./suabaitap.php?lopid=$lop_id&id=$id";
+}
+
+function xoaBaiTap($id,$lop_id) {
+  return "./xoabaitap.php?lopid=$lop_id&id=$id";
+}
+
 function gotoBaiKT($kt_id) {
-  return "./kiemtra.php?id=$kt_id";
+  return "./baikt.php?id=$kt_id";
+}
+
+function themBaiKT($id_lophoc) {
+  return "./thembaikt.php?lopid=$id_lophoc";
+}
+
+function suaBaiKT($id,$lop_id) {
+  return "./suabaikt.php?lopid=$lop_id&id=$id";
+}
+
+function xoaBaiKT($id,$lop_id) {
+  return "./xoabaikt.php?lopid=$lop_id&id=$id";
 }

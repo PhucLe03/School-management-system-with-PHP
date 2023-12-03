@@ -54,9 +54,9 @@ if (
         $id = $_POST['class'];
         $sv = $_POST['mssv'];
         $d = $_POST['score'];
-        if (empty($d)) {
-            $em  = "e"; $_SESSION['error'] = $em;
-            header("Location: ../nhapdiem.php?lopid=$id_lophoc&mssv=$sv");
+        if ($d<0||$d>10) {
+            $em  = "r"; $_SESSION['error'] = $em;
+            header("Location: ../nhapdiem.php?lopid=$id&mssv=$sv");
             exit;
         } else {
                 if (getDiem($id,$sv,$conn)===true) {
@@ -68,6 +68,6 @@ if (
         }
     } else {
         $em  = "e"; $_SESSION['error'] = $em;
-        header("Location: ../nhapdiem.php?lopid=$id_lophoc&mssv=$sv");
+        header("Location: ../nhapdiem.php?lopid=$id&mssv=$sv");
         exit;
     }

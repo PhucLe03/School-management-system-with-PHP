@@ -136,6 +136,38 @@ function getNoiDungBaiGiang($baigiang_id, $conn)
   }
 }
 
+function getNoiDungBaiTap($baitap_id, $conn)
+{
+  $sql = "SELECT * FROM baitap
+          WHERE id_e=:id";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':id', $baitap_id);
+
+  $stmt->execute();
+  if ($stmt->rowCount() == 1) {
+    $baitap = $stmt->fetch();
+    return $baitap;
+  } else {
+    return 0;
+  }
+}
+
+function getNoiDungBaiKT($baikt_id, $conn)
+{
+  $sql = "SELECT * FROM kiemtra
+          WHERE id_t=:id";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':id', $baikt_id);
+
+  $stmt->execute();
+  if ($stmt->rowCount() == 1) {
+    $baikt = $stmt->fetch();
+    return $baikt;
+  } else {
+    return 0;
+  }
+}
+
 function getBaiTapCuaLop($lop_id, $conn)
 {
   $sql = "SELECT id_e,tieude FROM baitap
