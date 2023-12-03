@@ -48,7 +48,7 @@ if (
         $sql = "";
         $tucach = "";
         if ($role=="AD") {
-            $sql = "SELECT * FROM admin 
+            $sql = "SELECT * FROM login_ad 
                     WHERE tendangnhap = ?";
             $tucach = "Admin";
         } else if ($role=="GV") {

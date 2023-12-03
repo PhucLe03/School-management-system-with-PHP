@@ -76,7 +76,7 @@ if (!isset($_SESSION)) {
                     <select class="form-control" name="role">
                         <option value="SV">Sinh Viên</option>
                         <option value="GV">Giảng Viên</option>
-                        <option value="AD">Admin</option>
+                        <option value="AD">Quản lý</option>
                         <!-- <option value="EX">Con ma</option> -->
                     </select>
                 </div>

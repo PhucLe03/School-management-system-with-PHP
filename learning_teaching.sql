@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 04:21 AM
+-- Generation Time: Dec 03, 2023 at 03:34 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `learning_teaching`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `maadmin` varchar(127) NOT NULL,
+  `ho_tenlot` varchar(255) NOT NULL,
+  `ten` varchar(255) NOT NULL,
+  `tendangnhap` varchar(127) NOT NULL,
+  `matkhau` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `sdt` varchar(15) NOT NULL,
+  `namsinh` int(11) NOT NULL,
+  `gioitinh` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`maadmin`, `ho_tenlot`, `ten`, `tendangnhap`, `matkhau`, `email`, `sdt`, `namsinh`, `gioitinh`) VALUES
+('AD-1', 'Quản', 'Lý', 'admin', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'admin@hcmut.edu.vn', '0123456789', 2003, 1);
 
 -- --------------------------------------------------------
 
@@ -61,7 +86,10 @@ INSERT INTO `baigiang` (`id_l`, `id_lophoc`, `tieude`, `noidung`) VALUES
 (2, 1, 'Bài 2', 'Mô hình ER'),
 (3, 1, 'Bài 3', 'Mô hình ER (tt)'),
 (4, 3, 'Bài 1', 'Giới thiệu môn học'),
-(6, 2, 'Bài 1', 'Giới thiệu môn học');
+(6, 2, 'Bài 1', 'Giới thiệu môn học'),
+(7, 1, 'Bài cuối', 'Bài cuối cùng'),
+(8, 1, 'Bài ôn tập', 'Chúc các bạn thi tốt!'),
+(9, 6, 'Bài mở đầu', 'Giới thiệu môn học');
 
 -- --------------------------------------------------------
 
@@ -82,6 +110,29 @@ CREATE TABLE `baitap` (
 
 INSERT INTO `baitap` (`id_e`, `id_lophoc`, `tieude`, `noidung`) VALUES
 (1, 1, 'Bài tập 1', 'Làm bài tập 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diemso`
+--
+
+CREATE TABLE `diemso` (
+  `id_lophoc` int(11) NOT NULL,
+  `masinhvien` varchar(127) NOT NULL,
+  `sodiem` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `diemso`
+--
+
+INSERT INTO `diemso` (`id_lophoc`, `masinhvien`, `sodiem`) VALUES
+(1, 'SV-1', 8),
+(1, 'SV-2', 8.5),
+(1, 'SV-3', 1),
+(6, 'SV-1', 9),
+(2, 'SV-1', 8);
 
 -- --------------------------------------------------------
 
@@ -110,6 +161,23 @@ INSERT INTO `giangvien` (`magiangvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matk
 ('GV-2', 'Hiệu', 'Trưởng', 'hieutruong', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'hieutruong@hcmut.edu.vn', '0123456789', 1974, 1),
 ('GV-3', 'Chủ', 'Nhiệm', 'chunhiem', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'chunhiem@hcmut.edu.vn', '0123456789', 1979, 1),
 ('GV-4', 'Trưởng', 'Khoa', 'truongkhoa', '$2y$10$H7obJEdmLzqqcPy7wQWhsOLUvrgzC8f1Y1or2Gxaza5z1PT0tvLy6', 'truongkhoa@hcmut.edu.vn', '0123456789', 1990, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `in4admin`
+-- (See below for the actual view)
+--
+CREATE TABLE `in4admin` (
+`tendangnhap` varchar(127)
+,`ho_tenlot` varchar(255)
+,`ten` varchar(255)
+,`maadmin` varchar(127)
+,`namsinh` int(11)
+,`gioitinh` tinyint(1)
+,`sdt` varchar(15)
+,`email` varchar(255)
+);
 
 -- --------------------------------------------------------
 
@@ -185,7 +253,19 @@ CREATE TABLE `kiemtra` (
 --
 
 INSERT INTO `kiemtra` (`id_t`, `id_lophoc`, `tieude`, `noidung`, `thoigian`) VALUES
-(1, 1, 'Bài tập 1', 'Làm bài tập 1', 60);
+(1, 1, 'Bài kiểm tra Hệ CSDL', 'Làm bài kiểm tra', 60);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `login_ad`
+-- (See below for the actual view)
+--
+CREATE TABLE `login_ad` (
+`tendangnhap` varchar(127)
+,`matkhau` varchar(255)
+,`maadmin` varchar(127)
+);
 
 -- --------------------------------------------------------
 
@@ -292,11 +372,36 @@ INSERT INTO `sinhvien` (`masinhvien`, `ho_tenlot`, `ten`, `tendangnhap`, `matkha
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `xemdiem`
+-- (See below for the actual view)
+--
+CREATE TABLE `xemdiem` (
+`masinhvien` varchar(127)
+,`ho_tenlot` varchar(255)
+,`ten` varchar(255)
+,`id_lophoc` int(11)
+,`malophoc` varchar(127)
+,`makhoahoc` varchar(127)
+,`sodiem` float
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `all_lophoc`
 --
 DROP TABLE IF EXISTS `all_lophoc`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_lophoc`  AS SELECT `l`.`id_c` AS `id_c`, `l`.`malophoc` AS `malophoc`, `l`.`makhoahoc` AS `makhoahoc`, `k`.`tenkhoahoc` AS `tenkhoahoc`, `g`.`ho_tenlot` AS `ho_gv`, `g`.`ten` AS `ten_gv`, `g`.`magiangvien` AS `magiangvien`, `g`.`gioitinh` AS `gtgv`, count(`r`.`id_lophoc`) AS `count_sv` FROM (((`lophoc` `l` join `giangvien` `g` on(`g`.`magiangvien` = `l`.`magiangvien`)) join `khoahoc` `k` on(`k`.`makhoahoc` = `l`.`makhoahoc`)) join `lop_rec` `r`) WHERE `r`.`id_lophoc` = `l`.`id_c` GROUP BY `l`.`id_c` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `in4admin`
+--
+DROP TABLE IF EXISTS `in4admin`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `in4admin`  AS SELECT `admin`.`tendangnhap` AS `tendangnhap`, `admin`.`ho_tenlot` AS `ho_tenlot`, `admin`.`ten` AS `ten`, `admin`.`maadmin` AS `maadmin`, `admin`.`namsinh` AS `namsinh`, `admin`.`gioitinh` AS `gioitinh`, `admin`.`sdt` AS `sdt`, `admin`.`email` AS `email` FROM `admin` ;
 
 -- --------------------------------------------------------
 
@@ -319,6 +424,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `login_ad`
+--
+DROP TABLE IF EXISTS `login_ad`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `login_ad`  AS SELECT `admin`.`tendangnhap` AS `tendangnhap`, `admin`.`matkhau` AS `matkhau`, `admin`.`maadmin` AS `maadmin` FROM `admin` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `login_gv`
 --
 DROP TABLE IF EXISTS `login_gv`;
@@ -333,6 +447,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `login_sv`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `login_sv`  AS SELECT `sinhvien`.`tendangnhap` AS `tendangnhap`, `sinhvien`.`matkhau` AS `matkhau`, `sinhvien`.`masinhvien` AS `masinhvien` FROM `sinhvien` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `xemdiem`
+--
+DROP TABLE IF EXISTS `xemdiem`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `xemdiem`  AS SELECT `s`.`masinhvien` AS `masinhvien`, `s`.`ho_tenlot` AS `ho_tenlot`, `s`.`ten` AS `ten`, `r`.`id_lophoc` AS `id_lophoc`, `l`.`malophoc` AS `malophoc`, `l`.`makhoahoc` AS `makhoahoc`, `d`.`sodiem` AS `sodiem` FROM (((`in4sinhvien` `s` join `lop_rec` `r` on(`r`.`masinhvien` = `s`.`masinhvien`)) join `lophoc` `l` on(`r`.`id_lophoc` = `l`.`id_c`)) left join `diemso` `d` on(`d`.`id_lophoc` = `r`.`id_lophoc` and `s`.`masinhvien` = `d`.`masinhvien`))union select `s`.`masinhvien` AS `masinhvien`,`s`.`ho_tenlot` AS `ho_tenlot`,`s`.`ten` AS `ten`,`r`.`id_lophoc` AS `id_lophoc`,`l`.`malophoc` AS `malophoc`,`l`.`makhoahoc` AS `makhoahoc`,`d`.`sodiem` AS `sodiem` from (`diemso` `d` left join ((`in4sinhvien` `s` join `lop_rec` `r` on(`r`.`masinhvien` = `s`.`masinhvien`)) join `lophoc` `l` on(`r`.`id_lophoc` = `l`.`id_c`)) on(`d`.`id_lophoc` = `r`.`id_lophoc` and `s`.`masinhvien` = `d`.`masinhvien`))  ;
 
 --
 -- Indexes for dumped tables
@@ -351,6 +474,13 @@ ALTER TABLE `baigiang`
 ALTER TABLE `baitap`
   ADD PRIMARY KEY (`id_e`),
   ADD KEY `baitap_ibfk_1` (`id_lophoc`);
+
+--
+-- Indexes for table `diemso`
+--
+ALTER TABLE `diemso`
+  ADD KEY `id_lophoc` (`id_lophoc`),
+  ADD KEY `masinhvien` (`masinhvien`);
 
 --
 -- Indexes for table `giangvien`
@@ -402,7 +532,7 @@ ALTER TABLE `sinhvien`
 -- AUTO_INCREMENT for table `baigiang`
 --
 ALTER TABLE `baigiang`
-  MODIFY `id_l` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_l` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `baitap`
@@ -437,6 +567,13 @@ ALTER TABLE `baigiang`
 --
 ALTER TABLE `baitap`
   ADD CONSTRAINT `baitap_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id_c`);
+
+--
+-- Constraints for table `diemso`
+--
+ALTER TABLE `diemso`
+  ADD CONSTRAINT `diemso_ibfk_1` FOREIGN KEY (`id_lophoc`) REFERENCES `lophoc` (`id_c`),
+  ADD CONSTRAINT `diemso_ibfk_2` FOREIGN KEY (`masinhvien`) REFERENCES `sinhvien` (`masinhvien`);
 
 --
 -- Constraints for table `kiemtra`
