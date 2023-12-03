@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2023 at 03:34 AM
+-- Generation Time: Dec 03, 2023 at 07:46 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -87,7 +87,7 @@ INSERT INTO `baigiang` (`id_l`, `id_lophoc`, `tieude`, `noidung`) VALUES
 (3, 1, 'Bài 3', 'Mô hình ER (tt)'),
 (4, 3, 'Bài 1', 'Giới thiệu môn học'),
 (6, 2, 'Bài 1', 'Giới thiệu môn học'),
-(7, 1, 'Bài cuối', 'Bài cuối cùng'),
+(7, 1, 'Bài cuối', 'Bài cuối cùng.........'),
 (8, 1, 'Bài ôn tập', 'Chúc các bạn thi tốt!'),
 (9, 6, 'Bài mở đầu', 'Giới thiệu môn học');
 
@@ -130,7 +130,7 @@ CREATE TABLE `diemso` (
 INSERT INTO `diemso` (`id_lophoc`, `masinhvien`, `sodiem`) VALUES
 (1, 'SV-1', 8),
 (1, 'SV-2', 8.5),
-(1, 'SV-3', 1),
+(1, 'SV-3', 2),
 (6, 'SV-1', 9),
 (2, 'SV-1', 8);
 
@@ -229,10 +229,13 @@ CREATE TABLE `khoahoc` (
 --
 
 INSERT INTO `khoahoc` (`makhoahoc`, `tenkhoahoc`) VALUES
+('CO1027', 'Kỹ thuật lập trình'),
 ('CO2013', 'Hệ cơ sở dữ liệu'),
 ('CO3001', 'Công nghệ phần mềm'),
 ('CO3005', 'Nguyên lý ngôn ngữ lập trình'),
-('CO3093', 'Mạng máy tính');
+('CO3093', 'Mạng máy tính'),
+('MT1003', 'Giải tích 1'),
+('MT1005', 'Giải tích 2');
 
 -- --------------------------------------------------------
 
@@ -309,11 +312,13 @@ CREATE TABLE `lophoc` (
 --
 
 INSERT INTO `lophoc` (`id_c`, `malophoc`, `makhoahoc`, `magiangvien`) VALUES
+(11, 'CN01', 'CO1027', 'GV-2'),
 (1, 'CN01', 'CO2013', 'GV-1'),
 (8, 'CN01', 'CO3001', 'GV-3'),
 (2, 'CN01', 'CO3093', 'GV-2'),
 (3, 'CN02', 'CO2013', 'GV-1'),
 (9, 'CN02', 'CO3001', 'GV-4'),
+(13, 'CN02', 'CO3093', 'GV-3'),
 (6, 'CN03', 'CO3005', 'GV-1'),
 (7, 'CN04', 'CO3005', 'GV-1');
 
@@ -392,7 +397,7 @@ CREATE TABLE `xemdiem` (
 --
 DROP TABLE IF EXISTS `all_lophoc`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_lophoc`  AS SELECT `l`.`id_c` AS `id_c`, `l`.`malophoc` AS `malophoc`, `l`.`makhoahoc` AS `makhoahoc`, `k`.`tenkhoahoc` AS `tenkhoahoc`, `g`.`ho_tenlot` AS `ho_gv`, `g`.`ten` AS `ten_gv`, `g`.`magiangvien` AS `magiangvien`, `g`.`gioitinh` AS `gtgv`, count(`r`.`id_lophoc`) AS `count_sv` FROM (((`lophoc` `l` join `giangvien` `g` on(`g`.`magiangvien` = `l`.`magiangvien`)) join `khoahoc` `k` on(`k`.`makhoahoc` = `l`.`makhoahoc`)) join `lop_rec` `r`) WHERE `r`.`id_lophoc` = `l`.`id_c` GROUP BY `l`.`id_c` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_lophoc`  AS SELECT `l`.`id_c` AS `id_c`, `l`.`malophoc` AS `malophoc`, `l`.`makhoahoc` AS `makhoahoc`, `k`.`tenkhoahoc` AS `tenkhoahoc`, `g`.`ho_tenlot` AS `ho_gv`, `g`.`ten` AS `ten_gv`, `g`.`magiangvien` AS `magiangvien`, `g`.`gioitinh` AS `gtgv`, count(`r`.`id_lophoc`) AS `count_sv` FROM (((`lophoc` `l` join `giangvien` `g` on(`g`.`magiangvien` = `l`.`magiangvien`)) join `khoahoc` `k` on(`k`.`makhoahoc` = `l`.`makhoahoc`)) left join `lop_rec` `r` on(`l`.`id_c` = `r`.`id_lophoc`)) GROUP BY `l`.`id_c` ;
 
 -- --------------------------------------------------------
 
@@ -532,7 +537,7 @@ ALTER TABLE `sinhvien`
 -- AUTO_INCREMENT for table `baigiang`
 --
 ALTER TABLE `baigiang`
-  MODIFY `id_l` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_l` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `baitap`
@@ -550,7 +555,7 @@ ALTER TABLE `kiemtra`
 -- AUTO_INCREMENT for table `lophoc`
 --
 ALTER TABLE `lophoc`
-  MODIFY `id_c` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_c` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

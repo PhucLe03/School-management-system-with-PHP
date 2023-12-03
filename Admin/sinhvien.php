@@ -45,7 +45,7 @@ if (isset($_SESSION['maadmin']) && isset($_SESSION['tucach'])) {
             ?>
             <div class="container mt-5">
                 <h1><?= $real_title ?></h1>
-                <a class="btn btn-primary" href="<?php echo themBaiGiang($id_lophoc); ?>">Thêm sinh viên</a>
+                <a class="btn btn-primary" href="<?php echo themBaiGiang($id_lophoc); ?>">Thêm tài khoản sinh viên</a>
 
                 <?php
                 if ($sinhvien != 0) {
