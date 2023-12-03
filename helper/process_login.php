@@ -69,6 +69,7 @@ if (
             $password = $user['matkhau'];
             if ($username === $uname) {
                 if (password_verify($pass, $password)) {
+                    unset($_SESSION['pw']);
                     $_SESSION['tucach'] = $tucach;
                     if ($tucach=="Admin") {
                         $id = $user['maadmin'];

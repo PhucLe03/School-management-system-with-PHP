@@ -198,19 +198,6 @@ function getBaiKTTheoId($baitap_id, $conn)
   }
 }
 
-function getAllLop($conn)
-{
-  $sql = "SELECT * FROM all_lophoc";
-  $stmt = $conn->prepare($sql);
-  $stmt->execute();
-  if ($stmt->rowCount() > 1) {
-    $lops = $stmt->fetchAll();
-    return $lops;
-  } else {
-    return 0;
-  }
-}
-
 function getLopCuaSinhVien($sinhvien_id, $conn)
 {
   $sql = "SELECT * FROM `all_lophoc`

@@ -1,22 +1,5 @@
 <?php
 
-// Tat ca sinh vien 
-function getTatCaSinhVien($conn)
-{
-  $sql = "SELECT * FROM sinhvien";
-  $stmt = $conn->prepare($sql);
-  $stmt->execute();
-
-  if ($stmt->rowCount() >= 1) {
-    $sinhvien = $stmt->fetchAll();
-    return $sinhvien;
-  } else {
-    return 0;
-  }
-}
-
-
-
 // Sinh vien theo Id 
 function getSinhVienTheoId($id, $conn)
 {

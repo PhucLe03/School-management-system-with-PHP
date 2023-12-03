@@ -42,8 +42,7 @@ if (
       include "comp/navbar.php";
       ?>
       <?php
-      $student = 1;
-      if ($student != 0) {
+      if ($sinhvien != 0) {
       ?>
         <div class="container mt-5">
           <h1>Trang cá nhân sinh viên</h1>

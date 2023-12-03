@@ -42,8 +42,7 @@ if (
       include "comp/navbar.php";
       ?>
       <?php
-      $student = 1;
-      if ($student != 0) {
+      if ($admin != 0) {
       ?>
         <div class="container mt-5">
           <h1>Trang cá nhân quản lý</h1>
@@ -57,7 +56,7 @@ if (
             <div class="col-8">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Họ và tên: <?= $tenadmin ?></li>
-                <li class="list-group-item">Mã sinh viên: <?= $admin['maadmin'] ?></li>
+                <li class="list-group-item">Mã nhân viên: <?= $admin['maadmin'] ?></li>
                 <li class="list-group-item">Năm sinh: <?= $admin['namsinh'] ?></li>
                 <li class="list-group-item">Giới tính: <?= $gioitinh ?></li>
                 <li class="list-group-item">Số điện thoại: <?= $admin['sdt'] ?></li>
