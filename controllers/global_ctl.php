@@ -20,6 +20,10 @@ function suaBaiGiang($id,$lop_id) {
   return "./suabaigiang.php?lopid=$lop_id&id=$id";
 }
 
+function xoaBaiGiang($id,$lop_id) {
+  return "./xoabaigiang.php?lopid=$lop_id&id=$id";
+}
+
 function gotoBaiTap($baitap_id) {
   return "./baitap.php?id=$baitap_id";
 }

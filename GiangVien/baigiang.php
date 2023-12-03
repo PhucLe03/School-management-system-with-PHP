@@ -91,7 +91,8 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                             <hr />
 
                             <a href="<?php echo suaBaiGiang($id_baigiang, $id_lophoc); ?>" class="btn btn-primary">Sửa</a>
-                            <button class="btn btn-primary" style="background-color: red;">Xóa</button>
+                            <a href="<?php echo xoaBaiGiang($id_baigiang, $id_lophoc); ?>" class="btn btn-primary" style="background-color: red;">Xóa</a>
+                            <!-- <button class="btn btn-primary">Xóa</button> -->
 
                         <?php } else { ?>
                             <div class="alert alert-info" role="alert">
