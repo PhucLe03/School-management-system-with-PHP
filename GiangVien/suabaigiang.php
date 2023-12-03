@@ -90,7 +90,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                             } else if ($err_stmt == "t") {
                                                 $err = "Tiêu đề không được trống";
                                             } else if ($err_stmt == "c") {
-                                                $err = "Nộ dung không được để trống";
+                                                $err = "Nội dung không được để trống";
                                             } else {
                                                 $err = "Đã có lỗi xảy ra";
                                             }
