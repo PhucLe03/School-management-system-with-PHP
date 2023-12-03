@@ -47,6 +47,20 @@
 #contact {
 	min-height: 100vh;
 }
+
+#contact .card-1{
+	/* max-width: 600px; */
+	width: 90%;
+	background: rgba(255,255,255, 0.7);
+	padding: 20px;
+	border-radius: 5px;
+}
+
+#contact .card-1 h5{
+	font-family: 'Lobster', cursive;
+	font-size: 28px;
+}
+
 #contact form{
 	max-width: 600px;
 	width: 90%;

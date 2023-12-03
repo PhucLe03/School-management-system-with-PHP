@@ -16,6 +16,7 @@ session_start();
 		?>
 	</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="icon" href="imgs/icon.ico">
 </head>
@@ -79,12 +80,35 @@ session_start();
 				<div class="card mb-3 card-1">
 					<div class="row g-0">
 						<div class="col-md-4">
-							<img src="imgs/logo.png" class="img-fluid rounded-start">
+							<img src="imgs/logo.png" alt="logo" class="img-fluid rounded-start">
 						</div>
 						<div class="col-md-8">
 							<div class="card-body">
 								<h5 class="card-title">Giới thiệu</h5>
 								<p class="card-text">About BK</p>
+								<p class="card-text"><small class="text-muted">HCMUT</small></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="contact" class="d-flex justify-content-center align-items-center flex-column">
+				<div class="card mb-3 card-1">
+					<div class="row g-0">
+						<div class="col-md-4">
+							<img src="imgs/logo.png" alt="logo" class="img-fluid rounded-start">
+						</div>
+						<div class="col-md-8">
+							<div class="card-body">
+								<h5 class="card-title">Liên hệ</h5><br/>
+								
+								<p class="card-text"><span class="material-symbols-outlined">
+										call
+									</span>0123456789</p>
+								<p class="card-text"><span class="material-symbols-outlined">
+										home
+									</span>268 Lý Thường Kiệt, Phường 14, Quận 10, TP. HCM</p>
 								<p class="card-text"><small class="text-muted">HCMUT</small></p>
 							</div>
 						</div>
