@@ -107,7 +107,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                                                         echo $sv['ho_tenlot'] . " " . $sv['ten'];
 
                                                     } else echo "ERROR!!!";
-                                                    ?>" readonly>
+                                                    ?>" disabled>
                                                 <label class="form-label">Họ và tên</label>
                                             </div>
 
