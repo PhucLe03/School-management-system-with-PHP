@@ -57,6 +57,7 @@ if (isset($_SESSION['maadmin']) && isset($_SESSION['tucach'])) {
                                     <th scope="col">#</th>
                                     <th scope="col">Mã SV</th>
                                     <th scope="col">Tên sinh viên</th>
+                                    <th scope="col">Tên đăng nhập</th>
                                     <th scope="col">Năm sinh</th>
                                     <th scope="col">Giới tính</th>
                                     <th scope="col">Số điện thoại</th>
@@ -81,6 +82,7 @@ if (isset($_SESSION['maadmin']) && isset($_SESSION['tucach'])) {
                                         </th>
                                         <td scope="row" class="col-1"><?= $s['masinhvien'] ?></td>
                                         <td scope="row" class="col-4"><?= $sv ?></td>
+                                        <td scope="row" class="col-1"><?= $s['tendangnhap'] ?></td>
                                         <td scope="row" class="col-1"><?= $s['namsinh'] ?></td>
                                         <td scope="row" class="col"><?= $gSV ?></td>
                                         <td scope="row" class="col-2"><?= $s['sdt'] ?></td>
