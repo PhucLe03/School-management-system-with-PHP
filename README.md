@@ -31,13 +31,22 @@ Database gồm các thực thể:
     - Tạo tài khoản giảng viên, sinh viên
     - Tạo môn/khóa học
     - Tạo lớp học với giảng viên phụ trách
-    <!-- - Thêm sinh viên vào lớp học -->
+    - Thêm sinh viên vào lớp học
 
 Các chức năng chung:
 - Đăng nhập
 - Xem thông tin tài khoản
 - Đổi mật khẩu
 
-## Reference
+## Technologies - Công nghệ sử dụng
+
+- PHP
+- MySQL
+- HTML
+- CSS
+- Bootstrap 5
+- Javascript
+
+## Reference - Tham khảo
 
 Template from [codingWithElias](https://github.com/codingWithElias/school-management-system-php).
