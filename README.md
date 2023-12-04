@@ -47,6 +47,27 @@ Các chức năng chung:
 - Bootstrap 5
 - Javascript
 
+## Manual - Hướng dẫn sử dụng
+
+- Yêu cầu:
+    - Cài đặt [PHP](https://www.php.net/manual/en/install.php), [MySQL](https://dev.mysql.com/downloads/installer/) (khuyến khích cài đặt bằng [XAMPP](https://www.apachefriends.org/download.html)).
+    - Clone hoặc download file từ repository này.
+    ```c
+    git clone https://github.com/PhucLe03/Teaching-Learning-management-system-with-PHP
+    ```
+- Set up database cho ứng dụng
+    - Khởi động MySQL.
+    - Tạo database tên `learning_teaching` trong MySQL.
+    - Copy nội dung trong file [learning_teaching.sql](learning_teaching.sql) dán vào querybox trong database `learning_teaching` đã tạo trước đó.
+    - Mở terminal và navigate vào folder tên `learning_teaching`.
+    ```c
+    cd learning_teaching
+    ```
+    - Khởi động ứng dụng với port tùy ý (ở đây dùng port 3000).
+    ```c
+    php -S localhost:3000
+    ```
+
 ## Reference - Tham khảo
 
 Template from [codingWithElias](https://github.com/codingWithElias/school-management-system-php).
