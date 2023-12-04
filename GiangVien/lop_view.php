@@ -75,7 +75,7 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                         <a class="btn btn-primary" href="<?php echo "./danhsachsv.php?lopid=$id_lophoc"; ?>">
                             Xem danh sách sinh viên
                         </a>
-
+                        <br/> <br/>
                         <?php
                         if ($baigiang != 0) {
                         ?>
@@ -119,6 +119,12 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                     </tbody>
                                 </table>
                                 <?php
+                                } else { ?>
+                                <div class="alert alert-info" role="alert">
+                                    Chưa có bài giảng.
+                                </div>
+                                <?php } ?>
+                                <?php
                                 $baitap = getBaiTapCuaLop($id_lophoc, $conn); // getBaiTap
                                 if ($baitap != 0) {
                                 ?>
@@ -159,11 +165,15 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                             ?>
                                         </tbody>
                                     </table>
-                                <?php }
+                                <?php } else { ?>
+                                <div class="alert alert-info" role="alert">
+                                    Chưa có bài tập.
+                                </div>
+                                <?php } ?>
+                                <?php
                                 $kiemtra = getBaiKTCuaLop($id_lophoc, $conn); // getBaiTap
                                 if ($kiemtra != 0) {
                                 ?>
-
                                     <!-- Kiem tra  -->
                                     <table class="table table-sm table-bordered mt-3 n-table table-hover">
                                         <thead>
@@ -201,12 +211,13 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['id']
                                         </tbody>
                                     </table>
 
-                                <?php }
-                            } else { ?>
+                                <?php } else { ?>
                                 <div class="alert alert-info" role="alert">
-                                    Chưa có bài giảng.
+                                    Chưa có bài kiểm tra.
                                 </div>
-                            <?php } ?>
+                                <?php } ?>
+                                
+                            
                         <?php } else { ?>
                             <div class="alert alert-info" role="alert">
                                 Lớp học này đang được giảng viên khác quản lý.

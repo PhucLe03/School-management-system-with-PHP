@@ -62,17 +62,18 @@ if (isset($_SESSION['magiangvien']) && isset($_SESSION['tucach']) && $_GET['lopi
                 <div class="container mt-5">
                     <?php
                     if ($truycap != false) {
-                    ?>
+                        ?>
+                        <h1>Danh sách sinh viên</h1>
+                        <a href="<?php echo gotoLop($id_lophoc) ?>">
+                            <?= $real_title ?>
+                        </a>
+                        / <a style="color:darkslategrey;">
+                            Danh sách sinh viên
+                        </a>
+                        <br/> <br/>
                         <?php
                         if ($danhsach != 0) {
                         ?>
-                            <h1>Danh sách sinh viên</h1>
-                            <a href="<?php echo gotoLop($id_lophoc) ?>">
-                                <?= $real_title ?>
-                            </a>
-                            / <a style="color:darkslategrey;">
-                                Danh sách sinh viên
-                            </a>
                             <div class="row">
                                 <div class="col-9">
                                     <table class="table table-sm table-bordered mt-3 n-table table-hover">

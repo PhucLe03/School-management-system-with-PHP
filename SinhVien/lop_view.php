@@ -93,81 +93,93 @@ if (isset($_SESSION['masinhvien']) && isset($_SESSION['tucach']) && $_GET['id'])
                                     ?>
                                 </tbody>
                             </table>
+                    <?php } else { ?>
+                    <div class="alert alert-info" role="alert">
+                        Chưa có bài giảng.
+                    </div>
+                    <?php } ?>
+                    <?php
+                    $baitap = getBaiTapCuaLop($id_lophoc,$conn); // getBaiTap
+                    if ($baitap != 0) {
+                    ?>
+                    <!-- Bai Tap  -->
+                    <table class="table table-sm table-bordered mt-3 n-table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Bài tập</th>
+                                <th scope="col">Tiêu đề</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <?php
-                            $baitap = getBaiTapCuaLop($id_lophoc,$conn); // getBaiTap
-                            if ($baitap != 0) {
+                            $i = 1;
+                            foreach ($baitap as $bt) {
                             ?>
-                            <!-- Bai Tap  -->
-                            <table class="table table-sm table-bordered mt-3 n-table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Bài tập</th>
-                                        <th scope="col">Tiêu đề</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $i = 1;
-                                    foreach ($baitap as $bt) {
-                                    ?>
-                                        <tr>
-                                            <th scope="row"  class="col-2">
-                                                <?php echo $i;
-                                                $i++; ?>
-                                            </th>
-                                            <td scope="row">
-                                                <a href="<?php echo gotoBaiTap($bt['id_e']) ?>">
-                                                    <?= $bt['tieude'] ?>
-                                                </a>
-                                            </td>
+                                <tr>
+                                    <th scope="row"  class="col-2">
+                                        <?php echo $i;
+                                        $i++; ?>
+                                    </th>
+                                    <td scope="row">
+                                        <a href="<?php echo gotoBaiTap($bt['id_e']) ?>">
+                                            <?= $bt['tieude'] ?>
+                                        </a>
+                                    </td>
 
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                            <?php }
-                            $kiemtra = getBaiKTCuaLop($id_lophoc,$conn); // getBaiTap
-                            if ($kiemtra != 0) {
+                                </tr>
+                            <?php
+                            }
                             ?>
-                            
-                            <!-- Kiem tra  -->
-                            <table class="table table-sm table-bordered mt-3 n-table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Kiểm tra</th>
-                                        <th scope="col">Tiêu đề</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $i = 1;
-                                    foreach ($kiemtra as $kt) {
-                                    ?>
-                                        <tr>
-                                            <th scope="row"  class="col-2">
-                                                <?php echo $i;
-                                                $i++; ?>
-                                            </th>
-                                            <td scope="row">
-                                                <a href="<?php echo gotoBaiKT($kt['id_t']) ?>">
-                                                    <?= $kt['tieude'] ?>
-                                                </a>
-                                            </td>
+                        </tbody>
+                    </table>
+                    <?php } else { ?>
+                    <div class="alert alert-info" role="alert">
+                        Chưa có bài tập.
+                    </div>
+                    <?php } ?>
+                    
+                    <?php
+                    $kiemtra = getBaiKTCuaLop($id_lophoc,$conn); // getBaiTap
+                    if ($kiemtra != 0) {
+                    ?>
+                    
+                    <!-- Kiem tra  -->
+                    <table class="table table-sm table-bordered mt-3 n-table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Kiểm tra</th>
+                                <th scope="col">Tiêu đề</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            foreach ($kiemtra as $kt) {
+                            ?>
+                                <tr>
+                                    <th scope="row"  class="col-2">
+                                        <?php echo $i;
+                                        $i++; ?>
+                                    </th>
+                                    <td scope="row">
+                                        <a href="<?php echo gotoBaiKT($kt['id_t']) ?>">
+                                            <?= $kt['tieude'] ?>
+                                        </a>
+                                    </td>
 
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
 
-                        <?php } } else { ?>
-                            <div class="alert alert-info" role="alert">
-                                Chưa có bài giảng.
-                            </div>
-                        <?php } ?>
+                    <?php } else { ?>
+                    <div class="alert alert-info" role="alert">
+                        Chưa có bài kiểm tra.
+                    </div>
+                    <?php } ?>
+                        
                     <?php } else { ?>
                         <div class="alert alert-info" role="alert">
                             Bạn chưa ghi danh vào lớp học này.
