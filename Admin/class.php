@@ -59,7 +59,7 @@ if (isset($_SESSION['maadmin']) && isset($_SESSION['tucach'])) {
                                     <th scope="col">Tên môn/khóa</th>
                                     <th scope="col">Tên lớp</th>
                                     <th scope="col">Giảng viên phụ trách</th>
-                                    <th scope="col">Sĩ số</th>
+                                    <th scope="col" colspan="2">Sĩ số</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,6 +83,11 @@ if (isset($_SESSION['maadmin']) && isset($_SESSION['tucach'])) {
                                         <td scope="row"><?= $lop['malophoc'] ?></td>
                                         <td scope="row"><?= $gv ?></td>
                                         <td scope="row"><?= $lop['count_sv'] ?></td>
+                                        <td scope="row">
+                                            <a  href="./class_view.php?id=<?=$lop['id_c']?>">
+                                                Đến lớp
+                                            </a>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

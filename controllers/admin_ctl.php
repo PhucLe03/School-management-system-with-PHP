@@ -69,12 +69,31 @@ function getTatCaKhoahoc($conn)
   $stmt->execute();
 
   if ($stmt->rowCount() >= 1) {
+    $khoahoc = $stmt->fetchAll();
+    return $khoahoc;
+  } else {
+    return 0;
+  }
+}
+
+function getSVKhacLop($id_lophoc, $conn) {
+  $sql = "SELECT * FROM `in4sinhvien`
+          WHERE masinhvien NOT IN
+          (
+            SELECT masinhvien FROM lop_rec
+            WHERE id_lophoc = ?
+          );";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$id_lophoc]);
+
+  if ($stmt->rowCount() >= 1) {
     $sinhvien = $stmt->fetchAll();
     return $sinhvien;
   } else {
     return 0;
   }
 }
+
 
 
 
