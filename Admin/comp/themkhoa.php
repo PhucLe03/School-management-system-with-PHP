@@ -11,6 +11,15 @@ if (
     
     $_SESSION['code'] = $ma;
     $_SESSION['name'] = $ten;
+
+    $sql0 = "SELECT * FROM khoahoc WHERE makhoahoc=?;";
+    $stmt0 = $conn->prepare($sql0);
+    $stmt0->execute([$ma]);
+    if ($stmt0->rowCount() == 1) {
+        $em  = "a"; $_SESSION['error'] = $em;
+        header("Location: ../addcourse.php");
+        exit;
+    }
     
     $miss_ma = false;
     $miss_ten = false;

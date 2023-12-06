@@ -57,6 +57,8 @@ if (isset($_SESSION['maadmin']) && isset($_SESSION['tucach'])) {
                                                 $err = "Mã không được trống";
                                             } else if ($err_stmt == "n") {
                                                 $err = "Tên không được để trống";
+                                            } else if ($err_stmt == "a") {
+                                                $err = "Mã khóa học đã được sử dụng";
                                             } else {
                                                 $err = "Đã có lỗi xảy ra";
                                             }
