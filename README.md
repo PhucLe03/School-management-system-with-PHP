@@ -52,7 +52,7 @@ Các chức năng chung:
 - Yêu cầu:
     - Cài đặt [PHP](https://www.php.net/manual/en/install.php), [MySQL](https://dev.mysql.com/downloads/installer/) (khuyến khích cài đặt bằng [XAMPP](https://www.apachefriends.org/download.html)).
     - Clone hoặc download file từ repository này.
-    ```c
+    ```console
     git clone https://github.com/PhucLe03/Teaching-Learning-management-system-with-PHP
     ```
 - Set up database cho ứng dụng
@@ -60,11 +60,11 @@ Các chức năng chung:
     - Tạo database tên `learning_teaching` trong MySQL.
     - Copy nội dung trong file [learning_teaching.sql](learning_teaching.sql) dán vào querybox trong database `learning_teaching` đã tạo trước đó.
     - Mở terminal và navigate vào folder tên `learning_teaching`.
-    ```c
+    ```console
     cd learning_teaching
     ```
     - Khởi động ứng dụng với port tùy ý (ở đây dùng port 3000).
-    ```c
+    ```console
     php -S localhost:3000
     ```
 
